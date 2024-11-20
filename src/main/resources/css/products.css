@@ -1,0 +1,33 @@
+.add-product {
+    -fx-background-radius: 10;
+    -fx-background-color: #000a4c;
+
+}
+.add-product:hover {
+    -fx-background-color: #fac1d9;
+}
+
+.text-field{
+    -fx-text-fill: #000000;
+    -fx-background-radius: 12;
+}
+
+.searchIcon:hover{
+    -fx-scale-x: 2;
+    -fx-scale-y: 2;
+
+}
+
+
+.product-table{
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-border-color: #000a4c;
+
+}
+.product-table-header{
+    -fx-pref-height: 45;
+    -fx-text-fill: #fd0000;
+    -fx-font-size: 16px;
+    -fx-font-family: "Poppins SemiBold";
+}

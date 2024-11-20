@@ -1,0 +1,38 @@
+
+.Dashboard{
+    -fx-background-color: #dfdfdf;
+}
+.LeftMenu{
+    -fx-background-color: #000a4c;
+    -fx-background-radius: 0 40 40 0 ;
+}
+.LeftMenuLogo{
+    -fx-background-radius: 100;
+}
+.topMenu{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 0 0 20 20 ;
+}
+.LeftMenu-button{
+    -fx-background-color: #fac1d9;
+    -fx-background-radius: 20 20 20 20 ;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14;
+}
+.sidebar-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+.sidebar-item:hover {
+    -fx-background-color: #0052cc;
+}
+
+.sidebar-item-active {
+    -fx-background-color: #dfdfdf;
+
+}
+.sidebar-item-active-test {
+    -fx-fill: #000000;
+}
+

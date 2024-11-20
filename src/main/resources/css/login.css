@@ -1,0 +1,17 @@
+.pane{
+    -fx-background-color: rgb(123, 0, 255);
+}
+.LoginCard{
+    -fx-background-color: #3D4142;
+    -fx-background-radius: 50;
+}
+.btnLogin{
+    -fx-background-color: #fac1d9;
+    -fx-background-radius: 10;
+
+}
+.text-field{
+    -fx-background-radius: 10;
+    -fx-background-color: #636363;
+    -fx-text-fill: white;
+}
