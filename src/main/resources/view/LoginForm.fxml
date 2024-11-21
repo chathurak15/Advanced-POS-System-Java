@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane styleClass="pane" stylesheets="@../css/login.css"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.LoginFormController">
+<AnchorPane styleClass="pane" stylesheets="@../css/admin/login.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.LoginFormController">
 <children>
 <HBox alignment="TOP_CENTER" prefHeight="77.0" prefWidth="1306.0" AnchorPane.bottomAnchor="590.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="80.0">
     <children>
@@ -21,7 +21,7 @@
         </Text>
     </children>
 </HBox>
-<AnchorPane layoutX="449.0" layoutY="179.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="472.0" prefWidth="409.0" styleClass="LoginCard" stylesheets="@../css/login.css" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="449.0" AnchorPane.rightAnchor="448.0" AnchorPane.topAnchor="179.0">
+<AnchorPane layoutX="449.0" layoutY="179.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="472.0" prefWidth="409.0" styleClass="LoginCard" stylesheets="@../css/admin/login.css" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="449.0" AnchorPane.rightAnchor="448.0" AnchorPane.topAnchor="179.0">
     <children>
         <VBox alignment="CENTER" prefHeight="467.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -49,7 +49,7 @@
                         <Insets top="50.0" />
                     </VBox.margin>
                 </Text>
-                <TextField fx:id="txtUserName" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="400.0" promptText="Enter your username" styleClass="text-field" stylesheets="@../css/login.css">
+                <TextField fx:id="txtUserName" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="400.0" promptText="Enter your username" styleClass="text-field" stylesheets="@../css/admin/login.css">
                     <font>
                         <Font name="Poppins Regular" size="16.0" />
                     </font>
@@ -71,7 +71,7 @@
                         <Insets top="30.0" />
                     </VBox.margin>
                 </Text>
-                <PasswordField fx:id="txtPassword" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="400.0" promptText="Enter your password" styleClass="text-field" stylesheets="@../css/login.css">
+                <PasswordField fx:id="txtPassword" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="400.0" promptText="Enter your password" styleClass="text-field" stylesheets="@../css/admin/login.css">
                     <VBox.margin>
                         <Insets top="5.0" />
                     </VBox.margin>
@@ -90,7 +90,7 @@
                         <Insets top="20.0" />
                     </VBox.margin>
                 </Text>
-                <Button fx:id="btnLogin" alignment="CENTER" mnemonicParsing="false" onAction="#LoginOnClick" prefHeight="44.0" prefWidth="98.0" styleClass="btnLogin" stylesheets="@../css/login.css" text="Login" textAlignment="CENTER">
+                <Button fx:id="btnLogin" alignment="CENTER" mnemonicParsing="false" onAction="#LoginOnClick" prefHeight="44.0" prefWidth="98.0" styleClass="btnLogin" stylesheets="@../css/admin/login.css" text="Login" textAlignment="CENTER">
                     <VBox.margin>
                         <Insets bottom="20.0" top="30.0" />
                     </VBox.margin>
