@@ -21,7 +21,7 @@ public class AppInitialize extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/LoginForm.fxml")));
+            Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/admin/Template.fxml")));
             Scene scene = new Scene(load);
             primaryStage.setScene(scene);
             primaryStage.show();

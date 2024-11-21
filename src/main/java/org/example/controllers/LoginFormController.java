@@ -57,7 +57,8 @@ public class LoginFormController {
                 stage.show();
 
             } catch (IOException e) {
-                new Alert(Alert.AlertType.ERROR, e + "Dashboard issue. please contact Developer").show();
+                new Alert(Alert.AlertType.ERROR,  "Dashboard issue. please contact Developer").show();
+                System.out.println(e);
             }
         }
             case "CASHIER" -> System.out.println("Navigating to Cashier Dashboard");

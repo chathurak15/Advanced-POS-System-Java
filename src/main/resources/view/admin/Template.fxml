@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane focusTraversable="true" styleClass="Dashboard" stylesheets="@../../css/admin/template.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.TemplateController">
+<AnchorPane focusTraversable="true" styleClass="Dashboard" stylesheets="@../../css/admin/template.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.TemplateController">
     <children>
       <AnchorPane fx:id="mainPane" layoutX="276.0" layoutY="56.0" prefHeight="692.0" prefWidth="803.0" styleClass="Dashboard" stylesheets="@../../css/admin/template.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
          <children>
@@ -327,7 +327,7 @@
                 <!--            <BottomNavigation />-->
                 <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="257.0">
                     <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager" wrappingWidth="86.58333587646484">
+                        <Text fx:id="txtRole" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager" wrappingWidth="86.58333587646484">
                             <font>
                                 <Font name="Poppins SemiBold" size="16.0" />
                             </font>

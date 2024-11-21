@@ -16,14 +16,6 @@ public class User {
         this.password = password;
     }
 
-    public User(int id, String name, String username, String email, String role) {
-        this.id = id;
-        this.name = name;
-        this.username = username;
-        this.email = email;
-        this.role = role;
-    }
-
     public User(int id, String name, String username, String email, String role, String password) {
         this.id = id;
         this.name = name;

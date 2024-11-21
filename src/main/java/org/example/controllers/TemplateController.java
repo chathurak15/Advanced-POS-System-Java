@@ -13,6 +13,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.example.dto.UserDTO;
+import org.example.repo.UserRepo;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,13 +38,17 @@ public class TemplateController {
     public Text txtFoodRelationships;
     public Text txtSuppliers;
     public Text txtUsers;
+    public Text txtRole;
     private List<HBox> sidebarItems;
     private List<Text> sidebarTexts;
 
+
     public void initialize() {
+
         sidebarItems = List.of( lbDashboard, lbProducts, lbDiscount, lbShortExpiry, lbFoodRelationships, lbSuppliers, lbUsers );
         sidebarTexts = List.of( txtDashboard, txtProducts,txtDiscount,txtShortExpiry,txtFoodRelationships, txtSuppliers, txtUsers );
     }
+
 
     public void DashboardOnClick(MouseEvent mouseEvent) {
         setActiveTab(lbDashboard);

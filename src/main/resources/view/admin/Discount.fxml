@@ -32,7 +32,7 @@
                      </HBox.margin>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="548.0" />
-                  <Button fx:id="btnAddDicount" mnemonicParsing="false" onAction="#AddDicountOnAction" prefHeight="34.0" prefWidth="179.0" styleClass="add-Discount" text="Add New +" textFill="WHITE">
+                  <Button fx:id="btnAddDicount" mnemonicParsing="false" onAction="#AddDiscountOnAction" prefHeight="34.0" prefWidth="179.0" styleClass="add-Discount" text="Add New +" textFill="WHITE">
                      <font>
                         <Font name="Poppins SemiBold" size="16.0" />
                      </font>

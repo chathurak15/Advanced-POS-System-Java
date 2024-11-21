@@ -8,6 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class UserRepo {
 
@@ -32,7 +35,7 @@ public class UserRepo {
         ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
+        if (rs.next()) {
             User user = new User();
             user.setId(rs.getInt("id"));
             user.setName(rs.getString("name"));
@@ -46,6 +49,28 @@ public class UserRepo {
         return null;
 
     }
+
+    //get all users details from db and set data for user
+    public List<User> getAllUsers() throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM users");
+        ResultSet rs = ps.executeQuery();
+        List<User> users = new ArrayList<>();
+
+        while (rs.next()) {
+            User user = new User();
+            user.setId(rs.getInt("id"));
+            user.setName(rs.getString("name"));
+            user.setUsername(rs.getString("username"));
+            user.setEmail(rs.getString("email"));
+            user.setRole(rs.getString("role"));
+            user.setPassword(null);
+            users.add(user);
+        }
+        return users;
+    }
+
+//    public Optional<User>
 
 //    public User loginUser(String username, String password) throws SQLException, ClassNotFoundException {
 //        try (Connection connection = DBConnection.getInstance().getConnection();

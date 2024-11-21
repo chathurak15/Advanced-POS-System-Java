@@ -21,13 +21,6 @@ public class UserDTO {
         this.setPassword(password);
     }
 
-    public UserDTO(int id, String name, String username, String email, String role) {
-        this.setId(id);
-        this.setName(name);
-        this.setUsername(username);
-        this.setEmail(email);
-        this.setRole(role);
-    }
 
     public int getId() {
         return id;

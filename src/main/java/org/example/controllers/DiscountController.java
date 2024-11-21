@@ -12,6 +12,6 @@ public class DiscountController {
     public void SearchIconOnClick(MouseEvent mouseEvent) {
     }
 
-    public void AddDicountOnAction(ActionEvent actionEvent) {
+    public void AddDiscountOnAction(ActionEvent actionEvent) {
     }
 }
