@@ -3,21 +3,25 @@ package org.example.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import jdk.jshell.spi.ExecutionControl;
 import org.example.dto.UserDTO;
 import org.example.service.UserService;
 import org.example.tm.UserTM;
 
+import java.io.IOException;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UsersController {
     public TextField txtSearch;
@@ -31,6 +35,7 @@ public class UsersController {
     public TableColumn colAction;
 
     private final UserService userService = new UserService();
+    public AnchorPane submainPane;
 
     public void initialize() {
         loadTableData();
@@ -54,6 +59,15 @@ public class UsersController {
     }
 
     public void AddUserOnAction(ActionEvent actionEvent) {
+
+        try {
+            Parent load = FXMLLoader.load(getClass().getResource("/view/admin/AddUser.fxml"));
+            submainPane.getChildren().add(load);
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "UI- Load error || please Contact Developer||").show();
+            e.printStackTrace();
+        }
     }
 
     public void loadTableData() {
