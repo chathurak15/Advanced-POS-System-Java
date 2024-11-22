@@ -12,9 +12,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="submainPane"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../css/admin/Users.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.UsersController">
+<AnchorPane fx:id="submainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../../css/admin/Users.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.UsersController">
    <children>
-      <AnchorPane prefHeight="692" prefWidth="803.0" stylesheets="@../../css/admin/Users.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="692" prefWidth="803.0" stylesheets="@../../../css/admin/Users.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="TOP_CENTER" layoutX="63.0" prefHeight="60.0" prefWidth="1093.0" AnchorPane.bottomAnchor="598.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -25,21 +25,21 @@
                   </TextField>
                   <ImageView fitHeight="32.0" fitWidth="34.0" onMouseClicked="#SearchIconOnClick" pickOnBounds="true" preserveRatio="true" style="-fx: 5;" styleClass="searchIcon">
                      <image>
-                        <Image url="@../../image/search.png" />
+                        <Image url="@../../../image/search.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="548.0" />
-                  <Button fx:id="btnAddUser" mnemonicParsing="false" onAction="#AddUserOnAction" prefHeight="34.0" prefWidth="179.0" styleClass="add-Discount" stylesheets="@../../css/admin/Users.css" text="Add New +" textFill="WHITE">
+                  <Button fx:id="btnAddUser" mnemonicParsing="false" onAction="#AddUserOnAction" prefHeight="34.0" prefWidth="179.0" styleClass="add-Discount" stylesheets="@../../../css/admin/Users.css" text="Add New +" textFill="WHITE">
                      <font>
                         <Font name="Poppins SemiBold" size="16.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="tblUsers" layoutX="53.0" layoutY="76.0" prefHeight="558.0" prefWidth="1149.0" styleClass="Discount-table" stylesheets="@../../css/admin/Users.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="76.0">
+            <TableView fx:id="tblUsers" layoutX="53.0" layoutY="76.0" prefHeight="558.0" prefWidth="1149.0" styleClass="Discount-table" stylesheets="@../../../css/admin/Users.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="76.0">
               <columns>
                 <TableColumn fx:id="colId" prefWidth="37.0" sortType="DESCENDING" styleClass="Discount-table-header" text="#" />
                 <TableColumn fx:id="colName" prefWidth="266.0" styleClass="Discount-table-header" text="Name" />

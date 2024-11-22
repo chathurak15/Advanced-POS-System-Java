@@ -7,23 +7,40 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import org.example.dto.UserDTO;
 import org.example.service.UserService;
+import org.example.tm.UserTM;
 
 import java.util.Optional;
 
-public class AddUserController {
+public class EditUserController {
+
+    public AnchorPane addUserPane;
     public TextField txtName;
     public TextField txtUsername;
     public TextField txtEmail;
     public ComboBox cmbUserRole;
     public PasswordField txtPassword;
     public PasswordField txtConformPassword;
-    public AnchorPane addUserPane;
 
-    private final UserService userService = new UserService();
+    private  UserTM selectedUser;
+    private final UserService userService = new UserService();;
+
+    public int id;
 
     public void initialize() {
         cmbUserRole.getItems().addAll("cashier","stock manager", "Manager");
 
+    }
+
+    public void setUserData(UserTM userTM) {
+        this.selectedUser = userTM;
+
+        // Populate the fields with the selected user's data
+        if (selectedUser != null) {
+            id = selectedUser.getId();
+            txtName.setText(selectedUser.getName());
+            txtUsername.setText(selectedUser.getUsername());
+            txtEmail.setText(selectedUser.getEmail());
+        }
     }
 
     public void closeOnClick(ActionEvent actionEvent) {
@@ -43,29 +60,24 @@ public class AddUserController {
         }
     }
 
-    public void RegisterOnClick(ActionEvent actionEvent) {
+    public void UpdateOnClick(ActionEvent actionEvent) {
 
-        String name = txtName.getText();
-        String username = txtUsername.getText();
-        String email = txtEmail.getText();
-        String EmployeeRole = cmbUserRole.getSelectionModel().getSelectedItem().toString();
-        String password = txtPassword.getText();
-        String conformPassword = txtConformPassword.getText();
-
-        //filed Validation
-        if (name.isEmpty()||username.isEmpty()||email.isEmpty()||password.isEmpty()||conformPassword.isEmpty()||EmployeeRole.isEmpty()) {
+        if (txtName.getText().isEmpty()||txtUsername.getText().isEmpty()||
+                txtEmail.getText().isEmpty()||txtPassword.getText().isEmpty()||txtConformPassword.getText().isEmpty()||
+                cmbUserRole.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);alert.setContentText("Please fill all the fields");alert.showAndWait();
         }else {
 
             //password validation
-            if (!password.equals(conformPassword)) {
+            if (!txtPassword.getText().equals(txtConformPassword.getText())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);alert.setContentText("Passwords do not match");alert.showAndWait();
             }else {
 
-                String addUser = userService.saveUser(collectUserData());
-                if (addUser.equals("User Saved")) {
+                String updateUser = userService.updateUser(collectData());
+                System.out.println(updateUser);
+                if (updateUser.equals("User Updated")) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText(null);
                     alert.setContentText("User added successfully!");
@@ -80,28 +92,28 @@ public class AddUserController {
                         new Alert(Alert.AlertType.ERROR, "UI- Load error || please Contact Developer||").show();
                         e.printStackTrace();
                     }
-                }else if(addUser.equals("Duplicate User")) {
+                }else if(updateUser.equals("Duplicate User")) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText(null);alert.setContentText("User Name or Email already exited! | Try again using uniqe details");alert.showAndWait();
 
                 }else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);alert.setContentText("Some thing Wrong Please check and try again!");alert.showAndWait();
+                    alert.setHeaderText(null);alert.setContentText("Something Wrong Please check and try again!");alert.showAndWait();
                 }
             }
         }
+
     }
 
-    //
-    private UserDTO collectUserData(){
+    private UserDTO collectData(){
         UserDTO userDTO = new UserDTO();
+        userDTO.setId(id);
         userDTO.setName(txtName.getText());
         userDTO.setUsername(txtUsername.getText());
         userDTO.setEmail(txtEmail.getText());
         userDTO.setRole(cmbUserRole.getSelectionModel().getSelectedItem().toString());
         userDTO.setPassword(txtPassword.getText());
+
         return userDTO;
     }
-
-
 }

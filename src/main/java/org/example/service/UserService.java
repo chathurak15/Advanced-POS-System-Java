@@ -1,40 +1,49 @@
 package org.example.service;
 
-import jdk.jshell.spi.ExecutionControl;
+import javafx.scene.control.Alert;
 import org.example.dto.UserDTO;
 import org.example.entity.User;
-import org.example.repo.UserRepo;
+import org.example.repo.custom.impl.UserRepoIMPL;
 
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 //import org.example.util.PasswordUtils;
 
 
 public class UserService {
-    private UserRepo userRepo = new UserRepo();
+    private UserRepoIMPL userRepoIMPL = new UserRepoIMPL();
 
     public UserService() {
     }
 
-    public UserService(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public UserService(UserRepoIMPL userRepoIMPL) {
+        this.userRepoIMPL = userRepoIMPL;
     }
 
-    public boolean saveUser(UserDTO userDTO) {
+
+    public String saveUser(UserDTO userDTO) {
+
         User user = convertDTOtoEntity(userDTO);
-//        user.setPassword(PasswordUtils.hashPassword(user.getPassword())); // Secure password
-
         try {
-            return userRepo.saveUser(user);
+            userRepoIMPL.save(user);
+            return "User Saved";
+        } catch (SQLException e){
+            if(e.getErrorCode()==1062){
+                return "Duplicate User";
+            };
         } catch (Exception e) {
-            throw new RuntimeException("Error saving user: " + e.getMessage());
+            return "something went wrong";
         }
+        return "error";
     }
 
+
+//    Handles user login and conversion but should avoid returning null.
     public UserDTO loginUser(String username, String password) {
         try {
-            User user = userRepo.loginUser(username, password);
+            User user = userRepoIMPL.login(username, password);
             if (user != null) {
                 return convertEntityToDTO(user);
             }
@@ -44,9 +53,11 @@ public class UserService {
         return null;
     }
 
+
+//    Handles fetching users, converting to DTOs, and exceptions but could improve error differentiation
     public List<UserDTO> getAllUsers() {
         try {
-            List<User> all = userRepo.getAllUsers();
+            List<User> all = userRepoIMPL.getAll();
             List<UserDTO> userDTOs = new ArrayList<>();
 
             if (all != null) {
@@ -63,9 +74,34 @@ public class UserService {
 
     }
 
+    public boolean deleteUser(int id) {
+        try {
+            return userRepoIMPL.delete(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public String updateUser(UserDTO userDTO) {
+        try {
+            userRepoIMPL.update(convertDTOtoEntity(userDTO));
+            return "User Updated";
+        } catch (SQLException e){
+            System.out.printf(e.getMessage());
+            if(e.getErrorCode()==1062){
+                return "Duplicate User";
+            };
+        } catch (Exception e) {
+            return "something went wrong";
+        }
+        return "error";
+    }
+
     //convert DTO to Entity
     private User convertDTOtoEntity(UserDTO userDTO) {
         User user = new User();
+        user.setId(userDTO.getId());
         user.setName(userDTO.getName());
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());

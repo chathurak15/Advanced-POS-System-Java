@@ -5,23 +5,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import jdk.jshell.spi.ExecutionControl;
+import javafx.scene.layout.HBox;
 import org.example.dto.UserDTO;
 import org.example.service.UserService;
 import org.example.tm.UserTM;
 
-import java.io.IOException;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 public class UsersController {
     public TextField txtSearch;
@@ -32,7 +28,7 @@ public class UsersController {
     public TableColumn<UserTM,String> colEmail;
     public TableColumn<UserTM,String> colRole;
     public TableColumn<UserTM,String> colUsername;
-    public TableColumn colAction;
+    public TableColumn<UserTM,Button> colAction;
 
     private final UserService userService = new UserService();
     public AnchorPane submainPane;
@@ -48,8 +44,65 @@ public class UsersController {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
-        colAction.setCellValueFactory(new PropertyValueFactory<>(""));
 
+        // Display both Delete and Edit buttons in the Action column
+        colAction.setCellFactory(param -> new TableCell<>() {
+            @Override
+            protected void updateItem(Button button, boolean empty) {
+                super.updateItem(button, empty);
+                if (empty || getTableRow() == null) {
+                    setGraphic(null);
+                } else {
+                    UserTM userTM = getTableRow().getItem();
+                    if (userTM != null) {
+                        HBox actionButtons = new HBox(10, userTM.getButton(), userTM.getButtonEdit());
+                        setGraphic(actionButtons);
+                    }
+                }
+            }
+        });
+    }
+
+    //delete user using user id. display conformation alert and after delete user form database.(userService)
+    private void deleteUser(UserTM userTM) {
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure you want to delete this user?", ButtonType.YES, ButtonType.NO);
+        confirmationAlert.setHeaderText(null);
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+            try {
+                boolean delete = userService.deleteUser(userTM.getId());
+                if (delete){
+                    Alert infoAlert = new Alert(Alert.AlertType.INFORMATION,"User deleted successfully!");
+                    infoAlert.setHeaderText(null);infoAlert.showAndWait();
+                    loadTableData();
+                }else {
+                    Alert warnAlert = new Alert(Alert.AlertType.WARNING, "Error deleting user! Try again");
+                    warnAlert.setHeaderText(null);warnAlert.showAndWait();
+                }
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, "Error deleting user. Please contact Developer.").show();
+            }
+        }
+    }
+
+    //edit user method- load edituser.fxml and call editusercontroller setUserData method using userTM param....
+    private void editUser(UserTM userTM) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/user/EditUser.fxml"));
+            Parent root = loader.load();
+
+            EditUserController editUserController = loader.getController();
+            editUserController.setUserData(userTM);
+
+            submainPane.getChildren().clear();
+            submainPane.getChildren().add(root);
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "UI- Load error || please Contact Developer||").show();
+            e.printStackTrace();
+        }
     }
 
     public void SearchOnClick(KeyEvent keyEvent) {
@@ -59,9 +112,8 @@ public class UsersController {
     }
 
     public void AddUserOnAction(ActionEvent actionEvent) {
-
         try {
-            Parent load = FXMLLoader.load(getClass().getResource("/view/admin/AddUser.fxml"));
+            Parent load = FXMLLoader.load(getClass().getResource("/view/admin/user/AddUser.fxml"));
             submainPane.getChildren().add(load);
 
         } catch (Exception e) {
@@ -97,6 +149,16 @@ public class UsersController {
         userTM.setUsername(userDTO.getUsername());
         userTM.setEmail(userDTO.getEmail());
         userTM.setRole(userDTO.getRole());
+
+        // Set up Delete button
+        Button deleteButton = new Button("Delete");
+        deleteButton.setOnAction(event -> deleteUser(userTM));
+        userTM.setButton(deleteButton);
+
+        // Set up Edit button
+        Button editButton = new Button("Edit");
+        editButton.setOnAction(event -> editUser(userTM));
+        userTM.setButtonEdit(editButton);
 
         return userTM;
     }

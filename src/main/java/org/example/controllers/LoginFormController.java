@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.dto.UserDTO;
 import org.example.service.UserService;
-import org.example.repo.UserRepo;
+import org.example.repo.custom.impl.UserRepoIMPL;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -19,7 +19,7 @@ public class LoginFormController {
     public TextField txtUserName;
     public PasswordField txtPassword;
 
-    private final UserService userService = new UserService(new UserRepo());
+    private final UserService userService = new UserService(new UserRepoIMPL());
 
     public void LoginOnClick(ActionEvent actionEvent) {
 

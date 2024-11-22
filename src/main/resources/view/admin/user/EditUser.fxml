@@ -15,18 +15,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../css/admin/Users.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.AddUserController">
+<AnchorPane fx:id="addUserPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../../css/admin/Users.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.EditUserController">
    <children>
-      <AnchorPane layoutX="110.0" layoutY="3.0" prefHeight="728.0" prefWidth="1112.0" stylesheets="@../../css/admin/Users.css">
+      <AnchorPane layoutX="110.0" layoutY="3.0" prefHeight="728.0" prefWidth="1112.0" stylesheets="@../../../css/admin/Users.css">
          <padding>
             <Insets left="15.0" right="30.0" />
          </padding>
          <children>
-            <VBox alignment="CENTER" layoutX="276.0" layoutY="15.0" prefHeight="699.0" prefWidth="549.0" styleClass="LoginCard" stylesheets="@../../css/admin/login.css">
+            <VBox alignment="CENTER" layoutX="171.0" prefHeight="699.0" prefWidth="549.0" styleClass="LoginCard" stylesheets="@../../../css/admin/login.css">
                <children>
                   <HBox prefHeight="77.0" prefWidth="496.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Register New User" textAlignment="CENTER" wrappingWidth="406.3125">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Update User" textAlignment="CENTER" wrappingWidth="406.3125">
                            <font>
                               <Font name="Poppins ExtraBold" size="33.0" />
                            </font>
@@ -35,21 +35,26 @@
                                  <stops>
                                     <Stop>
                                        <color>
-                                          <Color red="1.0" green="0.07000000029802322" blue="0.8140000104904175" />
+                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="0.9966442953020134">
+                                       <color>
+                                          <Color red="1.0" />
                                        </color>
                                     </Stop>
                                     <Stop offset="1.0">
                                        <color>
-                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                          <Color red="1.0" />
                                        </color>
                                     </Stop>
                                  </stops>
                               </LinearGradient>
                            </fill>
                         </Text>
-                        <Button mnemonicParsing="false" onAction="#closeOnClick" prefHeight="24.0" prefWidth="23.0" style="-fx-background-color: red;" text="X" textAlignment="RIGHT" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#closeOnClick" opacity="0.75" prefHeight="19.0" prefWidth="28.0" style="-fx-background-color: red;" text="X" textAlignment="RIGHT" textFill="WHITE">
                            <font>
-                              <Font name="Poppins SemiBold" size="16.0" />
+                              <Font name="Poppins SemiBold" size="14.0" />
                            </font>
                         </Button>
                      </children>
@@ -110,7 +115,7 @@
                         <Insets bottom="7.0" top="20.0" />
                      </padding>
                   </Label>
-                  <ComboBox fx:id="cmbUserRole" prefHeight="37.0" prefWidth="453.0" />
+                  <ComboBox fx:id="cmbUserRole" prefHeight="37.0" prefWidth="453.0" promptText="--Select  Role--" style="-fx-background-radius: 10;" styleClass="cmbRole" />
                   <Label prefHeight="27.0" prefWidth="481.0" text="Password *" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Poppins SemiBold" size="15.0" />
@@ -120,7 +125,7 @@
                      </padding>
                   </Label>
                   <PasswordField fx:id="txtPassword" prefHeight="39.0" prefWidth="488.0" />
-                  <Label prefHeight="27.0" prefWidth="481.0" text="Conforim Password *" textAlignment="RIGHT" textFill="WHITE">
+                  <Label prefHeight="27.0" prefWidth="481.0" text="Conform Password *" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Poppins SemiBold" size="15.0" />
                      </font>
@@ -128,15 +133,15 @@
                         <Insets bottom="7.0" top="15.0" />
                      </padding>
                   </Label>
-                  <PasswordField fx:id="txtConforimPassword" prefHeight="39.0" prefWidth="488.0" />
+                  <PasswordField fx:id="txtConformPassword" prefHeight="39.0" prefWidth="488.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="488.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#closeOnClick" prefHeight="33.0" prefWidth="71.0" styleClass="pane" text="Close" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#closeOnClick" opacity="0.54" prefHeight="33.0" prefWidth="71.0" styleClass="btnclose" text="Close" textAlignment="CENTER">
                            <font>
                               <Font name="Poppins SemiBold" size="16.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#RegisterOnClick" prefHeight="33.0" prefWidth="143.0" styleClass="btnLogin" text="Register" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#UpdateOnClick" prefHeight="33.0" prefWidth="143.0" styleClass="btnLogin" text="Update" textAlignment="CENTER">
                            <font>
                               <Font name="Poppins SemiBold" size="16.0" />
                            </font>

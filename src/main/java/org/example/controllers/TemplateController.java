@@ -2,23 +2,15 @@ package org.example.controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.Window;
-import org.example.dto.UserDTO;
-import org.example.repo.UserRepo;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 public class TemplateController {
     public Label lbName;
@@ -106,7 +98,7 @@ public class TemplateController {
     public void UserOnClick(MouseEvent mouseEvent) {
         setActiveTab(lbUsers);
         setActiveText(txtUsers);
-        loadUI("admin/Users");
+        loadUI("admin/user/Users");
     }
 
     //set and remove css class for active hbox. this class using for hbox color change...

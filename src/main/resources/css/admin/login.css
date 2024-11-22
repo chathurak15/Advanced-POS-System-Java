@@ -10,8 +10,22 @@
     -fx-background-radius: 10;
 
 }
+.btnLogin:hover{
+    -fx-border-color: #f48200;
+    -fx-border-radius: 10;
+    -fx-border-width: 3px;
+
+
+}
 .text-field{
     -fx-background-radius: 10;
     -fx-background-color: #636363;
     -fx-text-fill: white;
+    -fx-font-family: "Poppins SemiBold";
 }
+.cmbRole{
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-font-family: "Poppins SemiBold", sans-serif;
+}
+
