@@ -21,6 +21,10 @@ public class AddProductController {
     public TextField txtQty;
     public ComboBox cmbSupplier;
     public DatePicker datePicker;
+    public TextField txtDiscount;
+
+    private double price;
+    private double cost;
 
     private final ProductServiceIMPL productService = new ProductServiceIMPL();
 
@@ -49,13 +53,22 @@ public class AddProductController {
 
     public void AddOnClick(ActionEvent actionEvent) {
 
+        boolean pricevalidation = txtPrice.getText().matches("-?\\d+(\\.\\d+)?") && txtCost.getText().matches("-?\\d+(\\.\\d+)?");
+
         if (txtName.getText().isEmpty()||txtCategory.getText().isEmpty()||txtPrice.getText().isEmpty()|| txtCost.getText().isEmpty()||
                 txtQty.getText().isEmpty()||cmbSupplier.getSelectionModel().isEmpty()||datePicker.getValue() == null) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);alert.setContentText("Please fill all the required fields!");alert.showAndWait();
 
+        }else if(!pricevalidation) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null); alert.setContentText("Please enter a valid price or cost!");alert.showAndWait();
+
         }else {
+            price = Double.parseDouble(txtPrice.getText().trim());
+            cost = Double.parseDouble(txtCost.getText().trim());
+
             String addProduct = productService.save(collectData());
 
             if (addProduct.equals("Product saved")) {
@@ -90,17 +103,19 @@ public class AddProductController {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setName(txtName.getText());
         productDTO.setCategory(txtCategory.getText());
-        productDTO.setPrice(Double.valueOf(txtPrice.getText()));
-        productDTO.setCost(Double.valueOf(txtCost.getText()));
+        productDTO.setPrice(price);
+        productDTO.setCost(cost);
+        productDTO.setQuantity(Integer.parseInt(txtQty.getText()));
         productDTO.setSupplierid(cmbSupplier.getSelectionModel().getSelectedIndex());
         productDTO.setExpirydate(datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         productDTO.setDate(date());
+        productDTO.setDiscount(txtDiscount.getText());
 
         return productDTO;
     }
 
     public String date(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }

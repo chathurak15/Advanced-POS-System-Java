@@ -19,11 +19,13 @@
             <TableView fx:id="tblProducts" layoutX="53.0" layoutY="76.0" prefHeight="558.0" prefWidth="1149.0" styleClass="product-table" stylesheets="@../../../css/admin/products.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="76.0">
               <columns>
                 <TableColumn fx:id="colId" prefWidth="41.0" sortType="DESCENDING" styleClass="product-table-header" text="#" />
-                <TableColumn fx:id="colName" prefWidth="449.0" styleClass="product-table-header" text="Name" />
-                  <TableColumn fx:id="colCategory" prefWidth="196.0" styleClass="product-table-header" text="Category" />
-                  <TableColumn fx:id="colQty" prefWidth="67.0" styleClass="product-table-header" text="QTY" />
-                  <TableColumn fx:id="colPrice" prefWidth="159.0" styleClass="product-table-header" text="Price" />
-                  <TableColumn fx:id="colAction" prefWidth="188.0" styleClass="product-table-header" text="Action" />
+                <TableColumn fx:id="colName" prefWidth="347.0" styleClass="product-table-header" text="Name" />
+                  <TableColumn fx:id="colCategory" prefWidth="187.0" styleClass="product-table-header" text="Category" />
+                  <TableColumn fx:id="colQty" prefWidth="68.0" styleClass="product-table-header" text="QTY" />
+                  <TableColumn fx:id="colPrice" prefWidth="107.0" styleClass="product-table-header" text="Price" />
+                  <TableColumn fx:id="colcost" prefWidth="98.0" styleClass="product-table-header" text="Cost" />
+                  <TableColumn fx:id="colExpdate" prefWidth="120.0" styleClass="product-table-header" text="Exp Date" />
+                  <TableColumn fx:id="colAction" prefWidth="160.0" styleClass="product-table-header" text="Action" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

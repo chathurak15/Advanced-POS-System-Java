@@ -11,6 +11,8 @@ public class ProductTM {
     private String category;
     private int quantity;
     private double price;
+    private double cost;
+    private String expdate;
     private Button button;
     private Button buttonEdit;
 

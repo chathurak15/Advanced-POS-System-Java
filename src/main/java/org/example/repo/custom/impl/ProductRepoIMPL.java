@@ -7,7 +7,6 @@ import org.example.util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +15,23 @@ public class ProductRepoIMPL implements ProductRepo {
     @Override
     public boolean save(Product product) throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
-    PreparedStatement ps = connection.prepareStatement("INSERT INTO products (name,category,price,cost,quantity,supplier_id,expiry_date,added_at) " +
-            " VALUES (?,?,?,?,?,?,?,?)");
-    ps.setString(1, product.getName());
-    ps.setString(2, product.getCategory());
-    ps.setDouble(3, product.getPrice());
-    ps.setDouble(4, product.getCost());
-    ps.setInt(5, product.getQuantity());
-    ps.setInt(6, product.getSupplierid());
-    ps.setString(7, product.getExpirydate());
-    ps.setString(8, product.getDate());
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO products (name,category,price,cost,quantity,supplier_id,expiry_date,added_at,discount) " +
+            " VALUES (?,?,?,?,?,?,?,?,?)");
+        ps.setString(1, product.getName());
+        ps.setString(2, product.getCategory());
+        ps.setDouble(3, product.getPrice());
+        ps.setDouble(4, product.getCost());
+        ps.setInt(5, product.getQuantity());
+        ps.setInt(6, product.getSupplierid());
+        ps.setString(7, product.getExpirydate());
+        ps.setString(8, product.getDate());
+        ps.setString(9, product.getDiscount());
+
+        if (product.getDiscount() == null || product.getDiscount().isEmpty()) {
+            ps.setNull(9, java.sql.Types.VARCHAR); // Set null for the discount column
+        } else {
+            ps.setString(9, product.getDiscount());
+        }
 
     return ps.executeUpdate()>0;
     }

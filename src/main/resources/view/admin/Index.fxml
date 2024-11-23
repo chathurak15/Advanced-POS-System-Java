@@ -18,9 +18,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane focusTraversable="true" styleClass="Dashboard" stylesheets="@../../css/admin/template.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.TemplateController">
+<AnchorPane focusTraversable="true" styleClass="Dashboard" stylesheets="@../../css/admin/index.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.TemplateController">
     <children>
-      <AnchorPane fx:id="mainPane" layoutX="276.0" layoutY="56.0" prefHeight="692.0" prefWidth="803.0" styleClass="Dashboard" stylesheets="@../../css/admin/template.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+      <AnchorPane fx:id="mainPane" layoutX="276.0" layoutY="56.0" prefHeight="692.0" prefWidth="803.0" styleClass="Dashboard" stylesheets="@../../css/admin/index.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
          <children>
             <GridPane alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
@@ -123,7 +123,7 @@
                </children>
             </GridPane>
          </children></AnchorPane>
-        <HBox alignment="CENTER_RIGHT" layoutX="193.0" prefHeight="56.0" prefWidth="886.0" styleClass="topMenu" stylesheets="@../../css/admin/template.css" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="0.0">
+        <HBox alignment="CENTER_RIGHT" layoutX="193.0" prefHeight="56.0" prefWidth="886.0" styleClass="topMenu" stylesheets="@../../css/admin/index.css" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="0.0">
             <children>
                 <Label prefHeight="27.0" prefWidth="113.0" text="11.55 P.M">
                     <font>
@@ -136,7 +136,7 @@
                     </font>
                 </Label>
             </children></HBox>
-        <VBox prefHeight="747.0" prefWidth="276.0" styleClass="LeftMenu" stylesheets="@../../css/admin/template.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox prefHeight="747.0" prefWidth="276.0" styleClass="LeftMenu" stylesheets="@../../css/admin/index.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SEELE AI" textAlignment="CENTER" wrappingWidth="227.24000549316406">
                     <font>
@@ -162,7 +162,7 @@
                         <Insets left="5.0" top="10.0" />
                     </VBox.margin>
                 </Text>
-                <HBox fx:id="lbDashboard" alignment="CENTER_LEFT" onMouseClicked="#DashboardOnClick" prefHeight="50.0" prefWidth="257.0" styleClass="sidebar-item" stylesheets="@../../css/admin/template.css">
+                <HBox fx:id="lbDashboard" alignment="CENTER_LEFT" onMouseClicked="#DashboardOnClick" prefHeight="50.0" prefWidth="257.0" styleClass="sidebar-item" stylesheets="@../../css/admin/index.css">
                     <children>
                         <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -185,7 +185,7 @@
                         <Insets top="25.0" />
                     </VBox.margin>
                 </HBox>
-                <HBox fx:id="lbProducts" alignment="CENTER_LEFT" layoutX="10.0" layoutY="96.0" onMouseClicked="#ProductsOnClick" prefHeight="50.0" prefWidth="283.0" styleClass="sidebar-item" stylesheets="@../../css/admin/template.css">
+                <HBox fx:id="lbProducts" alignment="CENTER_LEFT" layoutX="10.0" layoutY="96.0" onMouseClicked="#ProductsOnClick" prefHeight="50.0" prefWidth="283.0" styleClass="sidebar-item" stylesheets="@../../css/admin/index.css">
                     <padding>
                         <Insets left="30.0" />
                     </padding>
@@ -332,7 +332,7 @@
                                 <Font name="Poppins SemiBold" size="16.0" />
                             </font>
                         </Text>
-                        <Button fx:id="btnLogout" mnemonicParsing="false" prefHeight="38.0" prefWidth="81.0" styleClass="LeftMenu-button" text="Logout">
+                        <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#LogoutOnAction" prefHeight="38.0" prefWidth="81.0" styleClass="LeftMenu-button" text="Logout">
                             <font>
                                 <Font name="Poppins Regular" size="12.0" />
                             </font>

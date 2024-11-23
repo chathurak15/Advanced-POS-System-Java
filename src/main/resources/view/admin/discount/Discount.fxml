@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../css/admin/Discount.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.DiscountController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../../css/admin/Discount.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.DiscountController">
    <children>
       <AnchorPane prefHeight="692" prefWidth="803.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -25,7 +25,7 @@
                   </TextField>
                   <ImageView fitHeight="32.0" fitWidth="34.0" onMouseClicked="#SearchIconOnClick" pickOnBounds="true" preserveRatio="true" style="-fx: 5;" styleClass="searchIcon">
                      <image>
-                        <Image url="@../../image/search.png" />
+                        <Image url="@../../../image/search.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
@@ -39,7 +39,7 @@
                   </Button>
                </children>
             </HBox>
-            <TableView layoutX="53.0" layoutY="76.0" prefHeight="558.0" prefWidth="1149.0" styleClass="product-table" stylesheets="@../../css/admin/products.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="76.0">
+            <TableView layoutX="53.0" layoutY="76.0" prefHeight="558.0" prefWidth="1149.0" styleClass="product-table" stylesheets="@../../../css/admin/products.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="76.0">
               <columns>
                 <TableColumn prefWidth="63.0" sortType="DESCENDING" styleClass="product-table-header" text="#" />
                 <TableColumn prefWidth="419.0" styleClass="product-table-header" text="Dicount" />

@@ -47,22 +47,35 @@ public class LoginFormController {
     private void navigateUserDashboard(String role) {
         switch (role.toUpperCase()) {
             case "MANAGER" -> {
-            try {
-                Stage window = (Stage) txtUserName.getScene().getWindow();
-                window.close();
-                Stage stage = new Stage();
-                Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/admin/Template.fxml")));
-                Scene scene = new Scene(load);
-                stage.setScene(scene);
-                stage.show();
+                try {
+                    Stage window = (Stage) txtUserName.getScene().getWindow();
+                    window.close();
+                    Stage stage = new Stage();
+                    Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/admin/Index.fxml")));
+                    Scene scene = new Scene(load);
+                    stage.setScene(scene);
+                    stage.show();
 
-            } catch (IOException e) {
-                new Alert(Alert.AlertType.ERROR,  "Dashboard issue. please contact Developer").show();
-                System.out.println(e);
+                } catch (IOException e) {
+                    new Alert(Alert.AlertType.ERROR,  "Dashboard issue. please contact Developer").show();
+
+                }
             }
-        }
             case "CASHIER" -> System.out.println("Navigating to Cashier Dashboard");
-            case "STOCK_MANAGER" -> System.out.println("Navigating to Stock Manager Dashboard");
+            case "STOCK MANAGER" -> {
+                try {
+                    Stage window = (Stage) txtUserName.getScene().getWindow();
+                    window.close();
+                    Stage stage = new Stage();
+                    Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/stockmanager/Index.fxml")));
+                    Scene scene = new Scene(load);
+                    stage.setScene(scene);
+                    stage.show();
+
+                } catch (IOException e) {
+                    new Alert(Alert.AlertType.ERROR,  "Dashboard issue. please contact Developer").show();
+                 }
+            }
             default -> showAlert(Alert.AlertType.ERROR, "Invalid role!");
         }
     }

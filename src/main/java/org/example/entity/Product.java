@@ -10,11 +10,12 @@ public class Product {
     private int supplierid;
     private String expirydate;
     private String date;
+    private String discount;
 
     public Product() {
     }
 
-    public Product(int id, String name, String category, double price, double cost, int quantity, int supplierid, String expirydate, String date) {
+    public Product(int id, String name, String category, double price, double cost, int quantity, int supplierid, String expirydate, String date, String discount) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -24,6 +25,7 @@ public class Product {
         this.supplierid = supplierid;
         this.expirydate = expirydate;
         this.date = date;
+        this.discount = discount;
     }
 
     public int getId() {
@@ -96,5 +98,12 @@ public class Product {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+    public void setDiscount(String discount) {
+        this.discount = discount;
     }
 }

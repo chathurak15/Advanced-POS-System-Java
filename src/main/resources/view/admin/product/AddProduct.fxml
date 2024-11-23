@@ -89,19 +89,53 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Label prefHeight="27.0" prefWidth="481.0" text="Product Price *" textAlignment="RIGHT" textFill="WHITE">
-                     <font>
-                        <Font name="Poppins SemiBold" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="7.0" top="15.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="txtPrice" prefHeight="42.0" prefWidth="475.0" promptText="Enter Product Selling Price">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
+                  <HBox prefHeight="90.0" prefWidth="435.0">
+                     <children>
+                        <VBox prefHeight="91.0" prefWidth="496.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="134.0" text="Product Price *" textAlignment="RIGHT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Poppins SemiBold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="7.0" top="15.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="txtPrice" prefHeight="34.0" prefWidth="243.0" promptText="Enter Product Selling Price">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="72.0" prefWidth="435.0">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="435.0" text="Discount" textAlignment="RIGHT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Poppins SemiBold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="7.0" left="2.0" top="15.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="txtDiscount" prefHeight="35.0" prefWidth="182.0" promptText="Enter Percentage">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
                   <Label prefHeight="27.0" prefWidth="481.0" text="Product Cost *" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Poppins SemiBold" size="14.0" />
@@ -115,7 +149,7 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Label prefHeight="27.0" prefWidth="481.0" text="Qty" textAlignment="RIGHT" textFill="WHITE">
+                  <Label prefHeight="27.0" prefWidth="481.0" text="Qty *" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Poppins SemiBold" size="14.0" />
                      </font>

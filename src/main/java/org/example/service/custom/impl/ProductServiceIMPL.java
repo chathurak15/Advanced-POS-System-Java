@@ -83,7 +83,8 @@ public class ProductServiceIMPL implements ProductService {
                 product.getQuantity(),
                 product.getSupplierid(),
                 product.getExpirydate(),
-                product.getDate()
+                product.getDate(),
+                product.getDiscount()
 
         );
 

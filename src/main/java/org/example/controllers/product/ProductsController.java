@@ -26,9 +26,12 @@ public class ProductsController {
     public TableColumn<ProductTM,String> colCategory;
     public TableColumn<ProductTM,Integer> colQty;
     public TableColumn<ProductTM,Double> colPrice;
+    public TableColumn<ProductTM,Double> colcost;
+    public TableColumn<ProductTM,String> colExpdate;
     public TableColumn<ProductTM,Button> colAction;
     public Button btnAddProduct;
     public AnchorPane submainPane;
+
 
     private ProductServiceIMPL productService = new ProductServiceIMPL();
 
@@ -45,6 +48,8 @@ public class ProductsController {
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colcost.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        colExpdate.setCellValueFactory(new PropertyValueFactory<>("expdate"));
 
         // Display both Delete and Edit buttons in the Action column
         colAction.setCellFactory(param -> new TableCell<>() {
@@ -150,6 +155,8 @@ public class ProductsController {
         productTM.setCategory(productDTO.getCategory());
         productTM.setQuantity(productDTO.getQuantity());
         productTM.setPrice(productDTO.getPrice());
+        productTM.setCost(productDTO.getCost());
+        productTM.setExpdate(productDTO.getExpirydate());
 
 
         // Set up Delete button

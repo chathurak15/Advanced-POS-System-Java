@@ -2,6 +2,7 @@ package org.example.controllers.user;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,13 +30,15 @@ public class UsersController {
     public TableColumn<UserTM,String> colRole;
     public TableColumn<UserTM,String> colUsername;
     public TableColumn<UserTM,Button> colAction;
-
     private final UserServiceIMPL userService = new UserServiceIMPL();
     public AnchorPane submainPane;
+    private ObservableList<UserTM> masterData; // Keep original data for filtering
 
     public void initialize() {
-        loadTableData();
+        masterData = FXCollections.observableArrayList(); // Initialize master data list
         visulizeTable();
+        loadTableData();
+
     }
 
     private void visulizeTable() {
@@ -96,7 +99,6 @@ public class UsersController {
             EditUserController editUserController = loader.getController();
             editUserController.setUserData(userTM);
 
-            submainPane.getChildren().clear();
             submainPane.getChildren().add(root);
 
         } catch (Exception e) {
@@ -106,9 +108,12 @@ public class UsersController {
     }
 
     public void SearchOnClick(KeyEvent keyEvent) {
+        setupSearch();
     }
 
+
     public void SearchIconOnClick(MouseEvent mouseEvent) {
+//        setupSearch();
     }
 
     public void AddUserOnAction(ActionEvent actionEvent) {
@@ -131,14 +136,35 @@ public class UsersController {
                 list.add(userTM);
             }
 
-            ObservableList<UserTM> userTMS = FXCollections.observableArrayList(list);
-            tblUsers.setItems(userTMS);
-
-        }catch (Exception e) {
+            masterData = FXCollections.observableArrayList(list); // Update masterData
+            tblUsers.setItems(masterData); // Initially set the full list to the table
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private void setupSearch() {
+            FilteredList<UserTM> filteredData = new FilteredList<>(masterData, p -> true);
 
+            // Add a listener to the search field
+            txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(user -> {
+                    // If search text is empty, display all rows
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    // Compare search text with user properties (case-insensitive)
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    return user.getName().toLowerCase().contains(lowerCaseFilter) ||
+                            user.getEmail().toLowerCase().contains(lowerCaseFilter) ||
+                            user.getRole().toLowerCase().contains(lowerCaseFilter) ||
+                            user.getUsername().toLowerCase().contains(lowerCaseFilter);
+                });
+            });
+
+            // Bind the filtered data to the table
+            tblUsers.setItems(filteredData);
     }
 
 //convert userDTO To UserTM and set values

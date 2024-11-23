@@ -17,4 +17,5 @@ public class ProductDTO {
     private int supplierid;
     private String expirydate;
     private String date;
+    private String discount;
 }
