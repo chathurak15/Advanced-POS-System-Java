@@ -1,4 +1,4 @@
-package org.example.controllers;
+package org.example.controllers.user;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import org.example.dto.UserDTO;
-import org.example.service.UserService;
+import org.example.service.custom.impl.UserServiceIMPL;
 
 import java.util.Optional;
 
@@ -19,7 +19,7 @@ public class AddUserController {
     public PasswordField txtConformPassword;
     public AnchorPane addUserPane;
 
-    private final UserService userService = new UserService();
+    private final UserServiceIMPL userService = new UserServiceIMPL();
 
     public void initialize() {
         cmbUserRole.getItems().addAll("cashier","stock manager", "Manager");
@@ -64,7 +64,7 @@ public class AddUserController {
                 alert.setHeaderText(null);alert.setContentText("Passwords do not match");alert.showAndWait();
             }else {
 
-                String addUser = userService.saveUser(collectUserData());
+                String addUser = userService.save(collectUserData());
                 if (addUser.equals("User Saved")) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText(null);

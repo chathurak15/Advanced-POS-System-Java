@@ -1,0 +1,41 @@
+.pane{
+    -fx-background-color: rgb(123, 0, 255);
+}
+.userCard{
+    -fx-background-color: #3D4142;
+    -fx-background-radius: 50;
+}
+.btnRegister{
+    -fx-background-color: #fac1d9;
+    -fx-background-radius: 10;
+
+}
+.btnRegister:hover{
+    -fx-border-color: #f48200;
+    -fx-border-radius: 10;
+    -fx-border-width: 3px;
+}
+
+.btnClose{
+    -fx-background-color: rgba(255, 0, 0, 0.61);
+    -fx-background-radius: 10;
+
+}
+.btnClose:hover {
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 10;
+    -fx-border-width: 3px;
+}
+
+.text-field{
+    -fx-background-radius: 10;
+    -fx-background-color: #636363;
+    -fx-text-fill: white;
+    -fx-font-family: "Poppins SemiBold";
+}
+.cmbRole{
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-font-family: "Poppins SemiBold", sans-serif;
+}
+

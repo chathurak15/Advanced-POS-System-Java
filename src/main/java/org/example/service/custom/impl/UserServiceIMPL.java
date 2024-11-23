@@ -1,29 +1,28 @@
-package org.example.service;
+package org.example.service.custom.impl;
 
-import javafx.scene.control.Alert;
 import org.example.dto.UserDTO;
 import org.example.entity.User;
 import org.example.repo.custom.impl.UserRepoIMPL;
+import org.example.service.custom.UserService;
 
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 //import org.example.util.PasswordUtils;
 
 
-public class UserService {
+public class UserServiceIMPL implements UserService {
     private UserRepoIMPL userRepoIMPL = new UserRepoIMPL();
 
-    public UserService() {
+    public UserServiceIMPL() {
     }
 
-    public UserService(UserRepoIMPL userRepoIMPL) {
+    public UserServiceIMPL(UserRepoIMPL userRepoIMPL) {
         this.userRepoIMPL = userRepoIMPL;
     }
 
 
-    public String saveUser(UserDTO userDTO) {
+    public String save(UserDTO userDTO) {
 
         User user = convertDTOtoEntity(userDTO);
         try {
@@ -55,7 +54,7 @@ public class UserService {
 
 
 //    Handles fetching users, converting to DTOs, and exceptions but could improve error differentiation
-    public List<UserDTO> getAllUsers() {
+    public List<UserDTO> getAll() {
         try {
             List<User> all = userRepoIMPL.getAll();
             List<UserDTO> userDTOs = new ArrayList<>();
@@ -74,7 +73,7 @@ public class UserService {
 
     }
 
-    public boolean deleteUser(int id) {
+    public boolean delete(int id) {
         try {
             return userRepoIMPL.delete(id);
         } catch (Exception e) {
@@ -83,7 +82,7 @@ public class UserService {
 
     }
 
-    public String updateUser(UserDTO userDTO) {
+    public String update(UserDTO userDTO) {
         try {
             userRepoIMPL.update(convertDTOtoEntity(userDTO));
             return "User Updated";
@@ -96,6 +95,11 @@ public class UserService {
             return "something went wrong";
         }
         return "error";
+    }
+
+    @Override
+    public UserDTO search(Integer integer) {
+        return null;
     }
 
     //convert DTO to Entity

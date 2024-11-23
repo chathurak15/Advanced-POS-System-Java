@@ -1,4 +1,4 @@
-package org.example.controllers;
+package org.example.controllers.user;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import org.example.dto.UserDTO;
-import org.example.service.UserService;
+import org.example.service.custom.impl.UserServiceIMPL;
 import org.example.tm.UserTM;
 
 import java.util.Optional;
@@ -22,7 +22,7 @@ public class EditUserController {
     public PasswordField txtConformPassword;
 
     private  UserTM selectedUser;
-    private final UserService userService = new UserService();;
+    private final UserServiceIMPL userService = new UserServiceIMPL();;
 
     public int id;
 
@@ -75,7 +75,7 @@ public class EditUserController {
                 alert.setHeaderText(null);alert.setContentText("Passwords do not match");alert.showAndWait();
             }else {
 
-                String updateUser = userService.updateUser(collectData());
+                String updateUser = userService.update(collectData());
                 System.out.println(updateUser);
                 if (updateUser.equals("User Updated")) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);

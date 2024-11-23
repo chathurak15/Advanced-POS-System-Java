@@ -15,14 +15,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="addUserPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../../css/admin/Users.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.AddUserController">
+<AnchorPane fx:id="addUserPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../../css/admin/addUser.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.user.AddUserController">
    <children>
-      <AnchorPane layoutX="110.0" layoutY="3.0" prefHeight="728.0" prefWidth="1112.0" stylesheets="@../../../css/admin/Users.css">
+      <AnchorPane layoutX="110.0" layoutY="3.0" prefHeight="728.0" prefWidth="1112.0" stylesheets="@../../../css/admin/addUser.css">
          <padding>
             <Insets left="15.0" right="30.0" />
          </padding>
          <children>
-            <VBox alignment="CENTER" layoutX="171.0" prefHeight="699.0" prefWidth="549.0" styleClass="LoginCard" stylesheets="@../../../css/admin/login.css">
+            <VBox alignment="CENTER" layoutX="171.0" prefHeight="699.0" prefWidth="549.0" styleClass="userCard" stylesheets="@../../../css/admin/addUser.css">
                <children>
                   <HBox prefHeight="77.0" prefWidth="496.0">
                      <children>
@@ -131,12 +131,12 @@
                   <PasswordField fx:id="txtConformPassword" prefHeight="39.0" prefWidth="488.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="488.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#closeOnClick" opacity="0.54" prefHeight="33.0" prefWidth="71.0" styleClass="btnclose" text="Close" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#closeOnClick" opacity="0.75" prefHeight="33.0" prefWidth="71.0" styleClass="btnClose" text="Close" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font name="Poppins SemiBold" size="16.0" />
+                              <Font name="Poppins SemiBold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#RegisterOnClick" prefHeight="33.0" prefWidth="143.0" styleClass="btnLogin" text="Register" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#RegisterOnClick" prefHeight="33.0" prefWidth="143.0" styleClass="btnRegister" text="Register" textAlignment="CENTER">
                            <font>
                               <Font name="Poppins SemiBold" size="16.0" />
                            </font>

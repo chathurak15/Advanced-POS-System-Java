@@ -1,4 +1,4 @@
-package org.example.controllers;
+package org.example.controllers.user;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import org.example.dto.UserDTO;
-import org.example.service.UserService;
+import org.example.service.custom.impl.UserServiceIMPL;
 import org.example.tm.UserTM;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class UsersController {
     public TableColumn<UserTM,String> colUsername;
     public TableColumn<UserTM,Button> colAction;
 
-    private final UserService userService = new UserService();
+    private final UserServiceIMPL userService = new UserServiceIMPL();
     public AnchorPane submainPane;
 
     public void initialize() {
@@ -72,7 +72,7 @@ public class UsersController {
 
         if (result.isPresent() && result.get() == ButtonType.YES) {
             try {
-                boolean delete = userService.deleteUser(userTM.getId());
+                boolean delete = userService.delete(userTM.getId());
                 if (delete){
                     Alert infoAlert = new Alert(Alert.AlertType.INFORMATION,"User deleted successfully!");
                     infoAlert.setHeaderText(null);infoAlert.showAndWait();
@@ -125,7 +125,7 @@ public class UsersController {
     public void loadTableData() {
         try {
             List<UserTM> list = new ArrayList<>();
-            List<UserDTO> allUsers = userService.getAllUsers();
+            List<UserDTO> allUsers = userService.getAll();
             for (UserDTO userDTO : allUsers) {
                 UserTM userTM = convertUserDTOToTM(userDTO);
                 list.add(userTM);

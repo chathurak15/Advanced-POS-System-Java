@@ -12,18 +12,18 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../css/admin/products.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.ProductsController">
+<AnchorPane fx:id="submainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../../css/admin/products.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.product.ProductsController">
    <children>
       <AnchorPane prefHeight="692" prefWidth="803.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView layoutX="53.0" layoutY="76.0" prefHeight="558.0" prefWidth="1149.0" styleClass="product-table" stylesheets="@../../css/admin/products.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="76.0">
+            <TableView fx:id="tblProducts" layoutX="53.0" layoutY="76.0" prefHeight="558.0" prefWidth="1149.0" styleClass="product-table" stylesheets="@../../../css/admin/products.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="76.0">
               <columns>
-                <TableColumn prefWidth="63.0" sortType="DESCENDING" styleClass="product-table-header" text="#" />
-                <TableColumn prefWidth="419.0" styleClass="product-table-header" text="Name" />
-                  <TableColumn prefWidth="213.0" styleClass="product-table-header" text="Category" />
-                  <TableColumn prefWidth="106.0" styleClass="product-table-header" text="Quantity" />
-                  <TableColumn prefWidth="181.0" styleClass="product-table-header" text="Price" />
-                  <TableColumn prefWidth="120.0" styleClass="product-table-header" text="Action" />
+                <TableColumn fx:id="colId" prefWidth="41.0" sortType="DESCENDING" styleClass="product-table-header" text="#" />
+                <TableColumn fx:id="colName" prefWidth="449.0" styleClass="product-table-header" text="Name" />
+                  <TableColumn fx:id="colCategory" prefWidth="196.0" styleClass="product-table-header" text="Category" />
+                  <TableColumn fx:id="colQty" prefWidth="67.0" styleClass="product-table-header" text="QTY" />
+                  <TableColumn fx:id="colPrice" prefWidth="159.0" styleClass="product-table-header" text="Price" />
+                  <TableColumn fx:id="colAction" prefWidth="188.0" styleClass="product-table-header" text="Action" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -38,14 +38,14 @@
                   </TextField>
                   <ImageView fitHeight="32.0" fitWidth="34.0" onMouseClicked="#SearchIconOnClick" pickOnBounds="true" preserveRatio="true" style="-fx: 5;" styleClass="searchIcon">
                      <image>
-                        <Image url="@../../image/search.png" />
+                        <Image url="@../../../image/search.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="548.0" />
-                  <Button fx:id="btnAddProduct" mnemonicParsing="false" prefHeight="34.0" prefWidth="179.0" styleClass="add-product" text="Add New +" textFill="WHITE">
+                  <Button fx:id="btnAddProduct" mnemonicParsing="false" onAction="#AddProductOnAction" prefHeight="34.0" prefWidth="161.0" styleClass="add-product" text="Add Product +" textFill="WHITE">
                      <font>
                         <Font name="Poppins SemiBold" size="16.0" />
                      </font>

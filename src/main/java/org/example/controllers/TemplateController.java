@@ -67,7 +67,7 @@ public class TemplateController {
     public void ProductsOnClick(MouseEvent mouseEvent) {
         setActiveTab(lbProducts);
         setActiveText(txtProducts);
-        loadUI("admin/products");
+        loadUI("admin/product/products");
 
     }
 
