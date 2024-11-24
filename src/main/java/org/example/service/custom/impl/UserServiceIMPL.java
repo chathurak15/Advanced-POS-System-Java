@@ -12,13 +12,13 @@ import java.util.List;
 
 
 public class UserServiceIMPL implements UserService {
-    private UserRepoIMPL userRepoIMPL = new UserRepoIMPL();
+    private UserRepoIMPL userRepo = new UserRepoIMPL();
 
     public UserServiceIMPL() {
     }
 
     public UserServiceIMPL(UserRepoIMPL userRepoIMPL) {
-        this.userRepoIMPL = userRepoIMPL;
+        this.userRepo = userRepoIMPL;
     }
 
 
@@ -26,7 +26,7 @@ public class UserServiceIMPL implements UserService {
 
         User user = convertDTOtoEntity(userDTO);
         try {
-            userRepoIMPL.save(user);
+            userRepo.save(user);
             return "User Saved";
         } catch (SQLException e){
             if(e.getErrorCode()==1062){
@@ -42,7 +42,7 @@ public class UserServiceIMPL implements UserService {
 //    Handles user login and conversion but should avoid returning null.
     public UserDTO loginUser(String username, String password) {
         try {
-            User user = userRepoIMPL.login(username, password);
+            User user = userRepo.login(username, password);
             if (user != null) {
                 return convertEntityToDTO(user);
             }
@@ -56,7 +56,7 @@ public class UserServiceIMPL implements UserService {
 //    Handles fetching users, converting to DTOs, and exceptions but could improve error differentiation
     public List<UserDTO> getAll() {
         try {
-            List<User> all = userRepoIMPL.getAll();
+            List<User> all = userRepo.getAll();
             List<UserDTO> userDTOs = new ArrayList<>();
 
             if (all != null) {
@@ -75,7 +75,7 @@ public class UserServiceIMPL implements UserService {
 
     public boolean delete(int id) {
         try {
-            return userRepoIMPL.delete(id);
+            return userRepo.delete(id);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -84,7 +84,7 @@ public class UserServiceIMPL implements UserService {
 
     public String update(UserDTO userDTO) {
         try {
-            userRepoIMPL.update(convertDTOtoEntity(userDTO));
+            userRepo.update(convertDTOtoEntity(userDTO));
             return "User Updated";
         } catch (SQLException e){
             System.out.printf(e.getMessage());

@@ -1,0 +1,34 @@
+.add-Supplier{
+    -fx-background-radius: 10;
+    -fx-background-color: #000a4c;
+
+}
+.add-Supplier:hover {
+    -fx-background-color: #ff0000;
+}
+
+.text-field{
+    -fx-text-fill: #000000;
+    -fx-background-radius: 12;
+}
+
+.searchIcon:hover{
+    -fx-scale-x: 2;
+    -fx-scale-y: 2;
+    
+}
+
+.Suppliers-table{
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-border-color: #000a4c;
+
+
+}
+.Suppliers-table-header{
+    -fx-pref-height: 42;
+    -fx-text-fill: #000000;
+    -fx-alignment: center;
+    -fx-font-size: 16px;
+    -fx-font-family: "Poppins SemiBold";
+}
