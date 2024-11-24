@@ -33,7 +33,14 @@ public class SupplierServiceIMPL implements SupplierService {
 
     @Override
     public String update(SupplierDTO supplierDTO) {
-        return "";
+        try {
+            supplierRepo.update(convertDtoToEntity(supplierDTO));
+            return "Supplier updated";
+        }catch (SQLException e){
+            return "SQL Error";
+        } catch (Exception e) {
+            return "not saved";
+        }
     }
 
     @Override

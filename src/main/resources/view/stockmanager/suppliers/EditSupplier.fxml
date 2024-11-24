@@ -2,9 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,18 +13,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="addUserPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../../css/admin/Users.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.user.EditUserController">
+<AnchorPane fx:id="updateSupplierPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.supplier.EditSupplierController">
    <children>
-      <AnchorPane layoutX="110.0" layoutY="3.0" prefHeight="728.0" prefWidth="1112.0" stylesheets="@../../../css/admin/Users.css">
+      <AnchorPane layoutX="110.0" layoutY="3.0" prefHeight="728.0" prefWidth="1112.0" stylesheets="@../../../css/admin/addUser.css">
          <padding>
             <Insets left="15.0" right="30.0" />
          </padding>
          <children>
-            <VBox alignment="CENTER" layoutX="171.0" prefHeight="699.0" prefWidth="549.0" styleClass="LoginCard" stylesheets="@../../../css/admin/login.css">
+            <VBox alignment="CENTER" layoutX="278.0" layoutY="91.0" prefHeight="498.0" prefWidth="556.0" styleClass="userCard" stylesheets="@../../../css/admin/addUser.css">
                <children>
                   <HBox prefHeight="77.0" prefWidth="496.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Update User" textAlignment="CENTER" wrappingWidth="406.3125">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Update Supplier" textAlignment="CENTER" wrappingWidth="406.3125">
                            <font>
                               <Font name="Poppins ExtraBold" size="33.0" />
                            </font>
@@ -35,17 +33,12 @@
                                  <stops>
                                     <Stop>
                                        <color>
-                                          <Color red="1.0" green="1.0" blue="1.0" />
-                                       </color>
-                                    </Stop>
-                                    <Stop offset="0.9966442953020134">
-                                       <color>
-                                          <Color red="1.0" />
+                                          <Color red="1.0" green="0.07000000029802322" blue="0.8140000104904175" />
                                        </color>
                                     </Stop>
                                     <Stop offset="1.0">
                                        <color>
-                                          <Color red="1.0" />
+                                          <Color red="1.0" green="1.0" blue="1.0" />
                                        </color>
                                     </Stop>
                                  </stops>
@@ -73,26 +66,13 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="txtName" prefHeight="42.0" prefWidth="488.0" promptText="Enter Employee Name">
+                  <TextField fx:id="txtName" prefHeight="42.0" prefWidth="488.0" promptText="Enter Supplier Name">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
-                  </TextField>
-                  <Label prefHeight="27.0" prefWidth="481.0" text="User Name *" textAlignment="RIGHT" textFill="WHITE">
-                     <font>
-                        <Font name="Poppins SemiBold" size="15.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="7.0" top="15.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="txtUsername" prefHeight="42.0" prefWidth="447.0" promptText="Enter Employee Username">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
                   </TextField>
                   <Label prefHeight="27.0" prefWidth="481.0" text="Email *" textAlignment="RIGHT" textFill="WHITE">
                      <font>
@@ -107,16 +87,7 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <Label prefHeight="27.0" prefWidth="481.0" text="Select Role for Employee *" textAlignment="RIGHT" textFill="WHITE">
-                     <font>
-                        <Font name="Poppins SemiBold" size="15.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="7.0" top="20.0" />
-                     </padding>
-                  </Label>
-                  <ComboBox fx:id="cmbUserRole" prefHeight="37.0" prefWidth="453.0" promptText="--Select  Role--" style="-fx-background-radius: 10;" styleClass="cmbRole" />
-                  <Label prefHeight="27.0" prefWidth="481.0" text="Password *" textAlignment="RIGHT" textFill="WHITE">
+                  <Label prefHeight="27.0" prefWidth="481.0" text="Number " textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Poppins SemiBold" size="15.0" />
                      </font>
@@ -124,24 +95,19 @@
                         <Insets bottom="7.0" top="15.0" />
                      </padding>
                   </Label>
-                  <PasswordField fx:id="txtPassword" prefHeight="39.0" prefWidth="488.0" />
-                  <Label prefHeight="27.0" prefWidth="481.0" text="Conform Password *" textAlignment="RIGHT" textFill="WHITE">
+                  <TextField fx:id="txtNumber" prefHeight="42.0" prefWidth="475.0" promptText="Enter Supplier Contact Number">
                      <font>
-                        <Font name="Poppins SemiBold" size="15.0" />
+                        <Font size="16.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="7.0" top="15.0" />
-                     </padding>
-                  </Label>
-                  <PasswordField fx:id="txtConformPassword" prefHeight="39.0" prefWidth="488.0" />
+                  </TextField>
                   <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="488.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#closeOnClick" opacity="0.54" prefHeight="33.0" prefWidth="71.0" styleClass="btnclose" text="Close" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#closeOnClick" opacity="0.75" prefHeight="33.0" prefWidth="71.0" styleClass="btnClose" text="Close" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font name="Poppins SemiBold" size="16.0" />
+                              <Font name="Poppins SemiBold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#UpdateOnClick" prefHeight="33.0" prefWidth="143.0" styleClass="btnLogin" text="Update" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#UpdateOnClick" prefHeight="33.0" prefWidth="143.0" styleClass="btnRegister" text="Update" textAlignment="CENTER">
                            <font>
                               <Font name="Poppins SemiBold" size="16.0" />
                            </font>

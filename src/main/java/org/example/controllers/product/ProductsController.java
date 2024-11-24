@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import org.example.controllers.user.EditUserController;
 import org.example.dto.ProductDTO;
 import org.example.service.custom.impl.ProductServiceIMPL;
 import org.example.tm.ProductTM;
@@ -93,23 +94,22 @@ public class ProductsController {
         }
     }
 
-//    //edit product method- load edituser.fxml and call editusercontroller setUserData method using userTM param....
-//    private void editUser(ProductTM productTM) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/product/EditUser.fxml"));
-//            Parent root = loader.load();
-//
-//            EditUserController editUserController = loader.getController();
-//            editUserController.setUserData(productTM);
-//
-//            submainPane.getChildren().clear();
-//            submainPane.getChildren().add(root);
-//
-//        } catch (Exception e) {
-//            new Alert(Alert.AlertType.ERROR, "UI- Load error || please Contact Developer||").show();
-//            e.printStackTrace();
-//        }
-//    }
+//edit product method- load editProduct.fxml and call editproductcontroller setUserData method using userTM param....
+    private void editproduct(ProductTM productTM) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/product/EditProduct.fxml"));
+            Parent root = loader.load();
+
+            EditProductController editProductController = loader.getController();
+            editProductController.setProductData(productTM);
+
+            submainPane.getChildren().add(root);
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "UI- Load error || please Contact Developer||").show();
+            e.printStackTrace();
+        }
+    }
 
     public void SearchOnClick(KeyEvent keyEvent) {
     }
@@ -166,7 +166,7 @@ public class ProductsController {
 
         // Set up Edit button
         Button editButton = new Button("Edit");
-//        editButton.setOnAction(event -> editUser(productTM));
+        editButton.setOnAction(event -> editproduct(productTM));
         productTM.setButtonEdit(editButton);
 
         return productTM;

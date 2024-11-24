@@ -37,8 +37,15 @@ public class SupplierRepoIMPL implements SupplierRepo {
         PreparedStatement ps = connection.prepareStatement("UPDATE suppliers SET name=?,email=?,number=? WHERE id=?");
         ps.setString(1, supplier.getName());
         ps.setString(2, supplier.getEmail());
-        ps.setString(3, supplier.getNumber());
+
+        if(supplier.getNumber() == null || supplier.getNumber().isEmpty()){
+            ps.setNull(3, java.sql.Types.VARCHAR);
+        }else{
+            ps.setString(3, supplier.getNumber());
+        }
+
         ps.setInt(4, supplier.getId());
+
         return ps.executeUpdate()>0;
     }
 

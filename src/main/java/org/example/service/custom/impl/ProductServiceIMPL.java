@@ -35,7 +35,17 @@ public class ProductServiceIMPL implements ProductService {
 
     @Override
     public String update(ProductDTO productDTO) {
-        return "";
+
+        try {
+            productRepo.update(convertDTOToEntity(productDTO));
+            return "Product updated";
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            return "Sql Error";
+
+        } catch (Exception e) {
+            return "something went wrong";
+        }
     }
 
     @Override

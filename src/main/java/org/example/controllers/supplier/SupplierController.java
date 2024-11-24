@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import org.example.controllers.user.EditUserController;
 import org.example.dto.SupplierDTO;
 import org.example.service.custom.impl.SupplierServiceIMPL;
 import org.example.tm.SupplierTM;
@@ -28,9 +29,9 @@ public class SupplierController {
     public TableView<SupplierTM> tblSuppliers;
     public TableColumn<SupplierTM,Integer> colId;
     public TableColumn<SupplierTM,String> colName;
-    public TableColumn<SupplierTM,String>  colEmail;
-    public TableColumn<SupplierTM,String>  colNumber;
-    public TableColumn<SupplierTM,Button>  colAction;
+    public TableColumn<SupplierTM,String> colEmail;
+    public TableColumn<SupplierTM,String> colNumber;
+    public TableColumn<SupplierTM,Button> colAction;
     private ObservableList<SupplierTM> masterData;
 
     private final SupplierServiceIMPL supplierService = new SupplierServiceIMPL();
@@ -45,7 +46,6 @@ public class SupplierController {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
-        colAction.setCellValueFactory(new PropertyValueFactory<>("action"));
 
         colAction.setCellFactory(param -> new TableCell<>() {
             @Override
@@ -81,10 +81,23 @@ public class SupplierController {
         }
     }
 
-    private void editUser(SupplierTM supplierTM) {
+    private void editSupplier(SupplierTM supplierTM) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/stockmanager/suppliers/EditSupplier.fxml"));
+            Parent root = loader.load();
+
+            EditSupplierController editSupplierController = loader.getController();
+            editSupplierController.setSupplierData(supplierTM);
+
+            submainPane.getChildren().add(root);
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "UI- Load error || please Contact Developer||").show();
+            e.printStackTrace();
+        }
     }
 
-    private void deleteUser(SupplierTM supplierTM) {
+    private void deleteSupplier(SupplierTM supplierTM) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure you want to delete this supplier?",ButtonType.YES,ButtonType.NO);
         alert.setHeaderText(null);
         Optional<ButtonType> result = alert.showAndWait();
@@ -142,7 +155,7 @@ public class SupplierController {
     }
 
 
-    public SupplierTM  convertDTOtoTM (SupplierDTO supplierDTO) {
+    public SupplierTM convertDTOtoTM (SupplierDTO supplierDTO) {
         SupplierTM supplierTM = new SupplierTM ();
         supplierTM.setId(supplierDTO.getId());
         supplierTM.setName(supplierDTO.getName());
@@ -150,11 +163,11 @@ public class SupplierController {
         supplierTM.setNumber(supplierDTO.getNumber());
 
         Button deleteButton = new Button("Delete");
-        deleteButton.setOnAction(event -> deleteUser(supplierTM));
+        deleteButton.setOnAction(event -> deleteSupplier(supplierTM));
         supplierTM.setButton(deleteButton);
 
         Button editButton = new Button("Edit");
-        editButton.setOnAction(event -> editUser(supplierTM));
+        editButton.setOnAction(event -> editSupplier(supplierTM));
         supplierTM.setButtonEdit(editButton);
 
         return supplierTM;

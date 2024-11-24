@@ -44,22 +44,13 @@ public class AddUserController {
     }
 
     public void RegisterOnClick(ActionEvent actionEvent) {
-
-        String name = txtName.getText();
-        String username = txtUsername.getText();
-        String email = txtEmail.getText();
-        String EmployeeRole = cmbUserRole.getSelectionModel().getSelectedItem().toString();
-        String password = txtPassword.getText();
-        String conformPassword = txtConformPassword.getText();
-
         //filed Validation
-        if (name.isEmpty()||username.isEmpty()||email.isEmpty()||password.isEmpty()||conformPassword.isEmpty()||EmployeeRole.isEmpty()) {
+        if(txtName.getText().isEmpty()||txtUsername.getText().isEmpty()||txtEmail.getText().isEmpty()||txtPassword.getText().isEmpty()||txtConformPassword.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);alert.setContentText("Please fill all the fields");alert.showAndWait();
         }else {
-
             //password validation
-            if (!password.equals(conformPassword)) {
+            if (!txtPassword.getText().equals(txtConformPassword.getText())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);alert.setContentText("Passwords do not match");alert.showAndWait();
             }else {

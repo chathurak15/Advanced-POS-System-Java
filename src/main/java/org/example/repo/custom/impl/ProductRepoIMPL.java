@@ -38,7 +38,24 @@ public class ProductRepoIMPL implements ProductRepo {
 
     @Override
     public boolean update(Product product) throws Exception {
-        return false;
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("UPDATE products SET name=?, category=?,price=?,cost=?,quantity=?,supplier_id=?,expiry_date=?,added_at=?,discount=? WHERE id=?");
+        ps.setString(1, product.getName());
+        ps.setString(2, product.getCategory());
+        ps.setDouble(3, product.getPrice());
+        ps.setDouble(4, product.getCost());
+        ps.setInt(5, product.getQuantity());
+        ps.setInt(6, product.getSupplierid());
+        ps.setString(7, product.getExpirydate());
+        ps.setString(8, product.getDate());
+        ps.setInt(10, product.getId());
+
+        if (product.getDiscount()== null || product.getDiscount().isEmpty()) {
+            ps.setNull(9, java.sql.Types.VARCHAR);
+        }else {
+            ps.setString(9, product.getDiscount());
+        }
+        return ps.executeUpdate()>0;
     }
 
     @Override
