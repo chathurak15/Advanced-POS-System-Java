@@ -125,15 +125,21 @@
          </children></AnchorPane>
         <HBox alignment="CENTER_RIGHT" layoutX="193.0" prefHeight="56.0" prefWidth="886.0" styleClass="topMenu" stylesheets="@../../css/StockManager/index.css" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <Label prefHeight="27.0" prefWidth="113.0" text="11.55 P.M">
+                <Label fx:id="lbDateandTime" prefHeight="40.0" prefWidth="216.0" styleClass="date" text="2024/11/25   04.18" textAlignment="CENTER">
                     <font>
-                        <Font name="Poppins SemiBold" size="17.0" />
+                        <Font name="Poppins SemiBold" size="19.0" />
                     </font>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
                 </Label>
-                <Label fx:id="lbName" layoutX="783.0" layoutY="29.0" prefHeight="27.0" prefWidth="152.0" text="Kavindu">
+                <Label fx:id="lbName" layoutX="783.0" layoutY="29.0" prefHeight="42.0" prefWidth="152.0" text="Kavindu">
                     <font>
-                        <Font name="Poppins SemiBold" size="17.0" />
+                        <Font name="Poppins SemiBold" size="19.0" />
                     </font>
+               <HBox.margin>
+                  <Insets left="20.0" right="5.0" />
+               </HBox.margin>
                 </Label>
             </children></HBox>
         <VBox prefHeight="747.0" prefWidth="276.0" styleClass="LeftMenu" stylesheets="@../../css/StockManager/index.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="submainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../../css/admin/shortexpiry.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.shortexpiry.ShortExpiryController">
+   <children>
+      <AnchorPane prefHeight="692" prefWidth="803.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView fx:id="tblExpProduct" layoutX="53.0" layoutY="76.0" prefHeight="558.0" prefWidth="1149.0" styleClass="product-table" stylesheets="@../../../css/admin/shortexpiry.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="76.0">
+              <columns>
+                <TableColumn fx:id="colId" prefWidth="32.0" sortType="DESCENDING" styleClass="product-table-header" text="#" />
+                <TableColumn fx:id="colName" prefWidth="361.0" styleClass="product-table-header" text="Name" />
+                  <TableColumn fx:id="colCategory" prefWidth="175.0" styleClass="product-table-header" text="Category" />
+                  <TableColumn fx:id="colQty" prefWidth="70.0" styleClass="product-table-header" text="QTY" />
+                  <TableColumn fx:id="colPrice" prefWidth="111.0" styleClass="product-table-header" text="Price" />
+                  <TableColumn fx:id="colExpDate" prefWidth="121.0" styleClass="product-table-header" text="Exp Date" />
+                  <TableColumn fx:id="colAction" prefWidth="228.0" styleClass="product-table-header" text="Action" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <HBox alignment="TOP_CENTER" layoutX="68.0" prefHeight="60.0" prefWidth="1104.0" AnchorPane.bottomAnchor="598.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TextField onKeyPressed="#SearchOnClick" prefHeight="33.0" prefWidth="336.0" promptText="Search by name....">
+                     <font>
+                        <Font name="Poppins Medium" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="455.0" />
+                  <ComboBox fx:id="cmbExp" onAction="#expOnClick" prefHeight="33.0" prefWidth="187.0" promptText="Expired" styleClass="cmbExp" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="15.0" right="30.0" />
+         </padding>
+      </AnchorPane>
+   </children>
+   <padding>
+      <Insets bottom="25.0" left="40.0" right="25.0" top="40.0" />
+   </padding>
+</AnchorPane>

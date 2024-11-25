@@ -13,5 +13,4 @@ public interface CrudRepository <T, ID>{
     T search(ID id) throws Exception;
 
     List<T> getAll() throws Exception;
-
 }

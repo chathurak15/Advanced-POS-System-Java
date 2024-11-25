@@ -1,5 +1,7 @@
 package org.example.controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,8 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -31,12 +36,14 @@ public class SMIndexController {
     public Text txtSuppliers;
     public HBox lbLowStock;
     public Text txtLowStocks;
+    public Label lbDateandTime;
     private List<HBox> sidebarItems;
     private List<Text> sidebarTexts;
 
     public void initialize() {
         sidebarItems = List.of( lbDashboard, lbProducts, lbShortExpiry, lbLowStock,  lbSuppliers );
         sidebarTexts = List.of( txtDashboard, txtProducts,txtShortExpiry,txtLowStocks, txtSuppliers);
+        updateDateTime();
     }
 
     public void DashboardOnClick(MouseEvent mouseEvent) {
@@ -53,19 +60,20 @@ public class SMIndexController {
     public void ShortExpiryOnClick(MouseEvent mouseEvent) {
         setActiveTab(lbShortExpiry);
         setActiveText(txtShortExpiry);
-//        loadUI("admin/products");
+        loadUI("admin/shortexpiry/ShortExpiry");
     }
 
     public void LowStocksOnAction(MouseEvent mouseEvent) {
         setActiveTab(lbLowStock);
         setActiveText(txtLowStocks);
+        loadUI("stockmanager/LowStock");
 
     }
 
     public void SuppliersOnClick(MouseEvent mouseEvent) {
         setActiveTab(lbSuppliers);
         setActiveText(txtSuppliers);
-//        loadUI("admin/Suppliers");
+        loadUI("stockmanager/suppliers/Suppliers");
     }
 
     private void setActiveTab(HBox activeTab) {
@@ -103,10 +111,15 @@ public class SMIndexController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to log out?", ButtonType.YES , ButtonType.NO);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.YES) {
+
+            Stage window = (Stage) mainPane.getScene().getWindow();
+            window.close();
+
+            Stage stage = new Stage();
+
             try {
                 Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/LoginForm.fxml")));
-                Scene scene = new Scene(load);
-                Stage stage = new Stage();
+                Scene scene = new Scene(load);;
                 stage.setScene(scene);
                 stage.show();
 
@@ -115,4 +128,21 @@ public class SMIndexController {
             }
         }
     }
+
+    private void updateDateTime() {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd   HH:mm");
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(
+                        Duration.seconds(1), // Update every second
+                        event -> {
+                            lbDateandTime.setText(LocalDateTime.now().format(formatter));
+                        }
+                )
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
+        timeline.play(); // Start the timeline
+    }
+
 }

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class TemplateController {
+public class MindexController {
     public Label lbName;
     public HBox lbDashboard;
     public HBox lbProducts;
@@ -87,7 +87,7 @@ public class TemplateController {
     public void ShortExpiryOnClick(MouseEvent mouseEvent) {
         setActiveTab(lbShortExpiry);
         setActiveText(txtShortExpiry);
-//        loadUI("admin/products");
+        loadUI("admin/shortexpiry/ShortExpiry");
     }
 
     public void FoodRelationshipsOnClick(MouseEvent mouseEvent) {

@@ -6,11 +6,18 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import org.example.dto.ProductDTO;
+import org.example.dto.SupplierDTO;
 import org.example.service.custom.impl.ProductServiceIMPL;
+import org.example.service.custom.impl.SupplierServiceIMPL;
 import org.example.tm.ProductTM;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class EditProductController {
@@ -29,9 +36,10 @@ public class EditProductController {
     private int id;
 
     private final ProductServiceIMPL productService = new ProductServiceIMPL();
+    private final SupplierServiceIMPL supplierService = new SupplierServiceIMPL();
 
     public void initialize() {
-        cmbSupplier.getItems().addAll("cashier","stock manager", "Manager");
+        getSelectedSupplierId();
     }
 
     public void closeOnClick(ActionEvent actionEvent) {
@@ -101,6 +109,36 @@ public class EditProductController {
 
     }
 
+    private Integer getSelectedSupplierId() {
+
+        Map<String, Integer> supplierMap = new HashMap<>();
+
+        List<SupplierDTO> suppliers = supplierService.getAllname();
+        if (suppliers != null && !suppliers.isEmpty()) {
+            for (SupplierDTO supplier : suppliers) {
+                cmbSupplier.getItems().add(supplier.getName());
+                supplierMap.put(supplier.getName(), supplier.getId()); // Associate name with ID
+            }
+        } else {
+            throw new RuntimeException("No suppliers found.");
+        }
+
+        cmbSupplier.setOnAction(event -> {
+            String selectedName = cmbSupplier.getValue().toString();
+            if (selectedName != null) {
+                Integer supplierId = supplierMap.get(selectedName);
+                System.out.println("Selected Supplier ID: " + supplierId);
+            }
+        });
+
+        String selectedName = String.valueOf(cmbSupplier.getValue());
+        if (selectedName != null) {
+            return supplierMap.get(selectedName);
+        } else {
+            return null;
+        }
+    }
+
     public ProductDTO collectData(){
         ProductDTO productDTO = new ProductDTO();
         productDTO.setName(txtName.getText());
@@ -108,7 +146,7 @@ public class EditProductController {
         productDTO.setPrice(price);
         productDTO.setCost(cost);
         productDTO.setQuantity(Integer.parseInt(txtQty.getText()));
-        productDTO.setSupplierid(cmbSupplier.getSelectionModel().getSelectedIndex());
+        productDTO.setSupplierid(getSelectedSupplierId());
         productDTO.setExpirydate(datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         productDTO.setDate(date());
         productDTO.setDiscount(txtDiscount.getText());
@@ -130,7 +168,31 @@ public class EditProductController {
         txtPrice.setText(Double.toString(productTM.getPrice()));
         txtQty.setText(String.valueOf(productTM.getQuantity()));
         txtCost.setText(String.valueOf(productTM.getCost()));
-//        datePicker.setDayCellFactory(productTM.getExpdate());
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Adjust pattern to match your date format
+
+        try {
+            if (productTM.getExpdate() != null && !productTM.getExpdate().isEmpty()) {
+                LocalDate expDate = LocalDate.parse(productTM.getExpdate(), dateFormatter);
+                datePicker.setValue(expDate);
+
+                // Set a DayCellFactory to customize the DatePicker
+                datePicker.setDayCellFactory(dp -> new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        // Disable dates before the expiration date
+                        if (item != null && expDate != null && item.isBefore(expDate)) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                });
+            }
+        } catch (DateTimeParseException e) {
+            System.err.println("Invalid date format in Expdate: " + productTM.getExpdate());
+        }
 
     }
 

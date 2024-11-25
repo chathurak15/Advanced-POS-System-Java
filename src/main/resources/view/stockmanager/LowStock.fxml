@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="submainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../css/StockManager/lowstock.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.LowStockController">
+   <children>
+      <AnchorPane prefHeight="692" prefWidth="803.0" stylesheets="@../../css/StockManager/lowstock.css" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" layoutX="64.0" prefHeight="60.0" prefWidth="1104.0" AnchorPane.bottomAnchor="598.0" AnchorPane.leftAnchor="49.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Line endX="100.0" startX="-266.23907470703125" startY="0.2928932309150696" />
+                  <Label prefHeight="43.0" prefWidth="317.0" styleClass="lowstockhedear" text="Low Stock Product">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Line endX="100.0" startX="-266.23907470703125" startY="0.2928932309150696" />
+               </children>
+            </HBox>
+            <TableView fx:id="tblLowStock" layoutX="53.0" layoutY="76.0" prefHeight="558.0" prefWidth="1149.0" styleClass="LowStock-table" stylesheets="@../../css/StockManager/lowstock.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="76.0">
+              <columns>
+                <TableColumn fx:id="colId" prefWidth="37.0" sortType="DESCENDING" styleClass="LowStock-header" text="ID" />
+                <TableColumn fx:id="colName" prefWidth="430.0" styleClass="LowStock-header" text="PRODUCT" />
+                  <TableColumn fx:id="colSupplierName" prefWidth="259.0" styleClass="LowStock-header" text="SUPPLIER NAME" />
+                  <TableColumn fx:id="colSupplierEmail" prefWidth="270.0" styleClass="LowStock-header" text="SUPPLIER EMAIL" />
+                  <TableColumn fx:id="colQuantity" prefWidth="98.0" sortType="DESCENDING" styleClass="LowStock-header" text="QUANTITY" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+         <padding>
+            <Insets left="15.0" right="30.0" />
+         </padding>
+      </AnchorPane>
+   </children>
+   <padding>
+      <Insets bottom="25.0" left="40.0" right="25.0" top="40.0" />
+   </padding>
+</AnchorPane>

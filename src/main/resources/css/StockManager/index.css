@@ -1,3 +1,7 @@
+/*@font-face {*/
+/*    font-family: "Poppins";*/
+/*    src: url("/font/Poppins-Regular.ttf");*/
+/*}*/
 
 .Dashboard{
     -fx-background-color: #dfdfdf;
@@ -23,6 +27,7 @@
     -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-cursor: hand;
+    -fx-font-family: "Poppins Bold", sans-serif;
 }
 .sidebar-item:hover {
     -fx-background-color: #0052cc;
@@ -34,5 +39,13 @@
 }
 .sidebar-item-active-test {
     -fx-fill: #000000;
+}
+
+.date{
+    -fx-text-fill: #00029a;
+    -fx-border-radius: 10;
+    -fx-border-color: #494949;
+    -fx-background-radius: 10;
+
 }
 

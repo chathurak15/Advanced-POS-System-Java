@@ -1,7 +1,9 @@
 package org.example.service.custom.impl;
 
+import org.example.dto.LowStockDTO;
 import org.example.dto.ProductDTO;
 import org.example.dto.UserDTO;
+import org.example.entity.LowStock;
 import org.example.entity.Product;
 import org.example.entity.User;
 import org.example.repo.custom.ProductRepo;
@@ -16,7 +18,7 @@ import java.util.List;
 
 public class ProductServiceIMPL implements ProductService {
 
-    private ProductRepo productRepo = new ProductRepoIMPL();
+    private final ProductRepoIMPL productRepo = new ProductRepoIMPL();
     private final ModelMapper modelMapper = new ModelMapper();
 
     @Override
@@ -83,6 +85,48 @@ public class ProductServiceIMPL implements ProductService {
         }
     }
 
+    public List<LowStockDTO> getLowStock() {
+        try {
+            List<LowStock> lowStock = productRepo.getLowStock();
+            List<LowStockDTO> lowStockDTOS = new ArrayList<>();
+            if (lowStock != null) {
+                for (LowStock lowStockEntity : lowStock) {
+                    lowStockDTOS.add(convertEntityToDTO(lowStockEntity));
+                }
+                return lowStockDTOS;
+            }else {
+                throw new RuntimeException("product not found");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Contact Develloper", e);
+        }
+    }
+
+    public List<ProductDTO> getExpired(String date) {
+        try {
+            List<Product> all = productRepo.getExpired(date);
+            List<ProductDTO> productDTOS = new ArrayList<>();
+
+            if (all != null) {
+                for (Product product : all) {
+                    productDTOS.add(convertEntityToDTO(product));
+                }return productDTOS;
+            }else {
+                throw new RuntimeException("product not found");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean AddDiscount(String discount, Integer id) {
+        try {
+            return productRepo.addDiscount(discount,id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private ProductDTO convertEntityToDTO(Product product) {
         return new ProductDTO(
                 product.getId(),
@@ -99,9 +143,15 @@ public class ProductServiceIMPL implements ProductService {
         );
 
     }
+
     private Product convertDTOToEntity(ProductDTO productDTO) {
         return modelMapper.map(productDTO, Product.class);
 
     }
+
+    private LowStockDTO convertEntityToDTO(LowStock lowStock) {
+        return modelMapper.map(lowStock, LowStockDTO.class);
+    }
+
 
 }

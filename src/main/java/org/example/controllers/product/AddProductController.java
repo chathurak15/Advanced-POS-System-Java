@@ -6,10 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import org.example.dto.ProductDTO;
+import org.example.dto.SupplierDTO;
 import org.example.service.custom.impl.ProductServiceIMPL;
+import org.example.service.custom.impl.SupplierServiceIMPL;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class AddProductController {
@@ -27,9 +32,10 @@ public class AddProductController {
     private double cost;
 
     private final ProductServiceIMPL productService = new ProductServiceIMPL();
+    private final SupplierServiceIMPL supplierService = new SupplierServiceIMPL();
 
     public void initialize() {
-        cmbSupplier.getItems().addAll("cashier","stock manager", "Manager");
+        getSelectedSupplierId();
     }
 
     public void closeOnClick(ActionEvent actionEvent) {
@@ -99,6 +105,42 @@ public class AddProductController {
 
     }
 
+
+    private Integer getSelectedSupplierId() {
+
+        Map<String, Integer> supplierMap = new HashMap<>();
+
+        List<SupplierDTO> suppliers = supplierService.getAllname();
+        if (suppliers != null && !suppliers.isEmpty()) {
+            for (SupplierDTO supplier : suppliers) {
+                cmbSupplier.getItems().add(supplier.getName());
+                supplierMap.put(supplier.getName(), supplier.getId()); // Associate name with ID
+            }
+        } else {
+            throw new RuntimeException("No suppliers found.");
+        }
+
+        // Step 2: Add a listener to detect when a supplier is selected
+        cmbSupplier.setOnAction(event -> {
+            String selectedName = cmbSupplier.getValue().toString();
+            if (selectedName != null) {
+                Integer supplierId = supplierMap.get(selectedName);
+                System.out.println("Selected Supplier ID: " + supplierId);
+            }
+        });
+
+        // Step 3: Return the supplier ID when requested
+        String selectedName = String.valueOf(cmbSupplier.getValue());
+        if (selectedName != null) {
+            return supplierMap.get(selectedName);
+        } else {
+            return null;
+        }
+    }
+
+
+
+
     public ProductDTO collectData(){
         ProductDTO productDTO = new ProductDTO();
         productDTO.setName(txtName.getText());
@@ -106,7 +148,7 @@ public class AddProductController {
         productDTO.setPrice(price);
         productDTO.setCost(cost);
         productDTO.setQuantity(Integer.parseInt(txtQty.getText()));
-        productDTO.setSupplierid(cmbSupplier.getSelectionModel().getSelectedIndex());
+        productDTO.setSupplierid(getSelectedSupplierId());
         productDTO.setExpirydate(datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         productDTO.setDate(date());
         productDTO.setDiscount(txtDiscount.getText());

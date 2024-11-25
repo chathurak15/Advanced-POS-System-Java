@@ -79,4 +79,18 @@ public class SupplierRepoIMPL implements SupplierRepo {
         }
         return suppliers;
     }
+
+    public List<Supplier> getAllname() throws Exception {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT id,name FROM suppliers");
+        ResultSet rs = ps.executeQuery();
+        List<Supplier> suppliers = new ArrayList<>();
+        while(rs.next()){
+            Supplier supplier = new Supplier();
+            supplier.setId(rs.getInt("id"));
+            supplier.setName(rs.getString("name"));
+            suppliers.add(supplier);
+        }
+        return suppliers;
+    }
 }

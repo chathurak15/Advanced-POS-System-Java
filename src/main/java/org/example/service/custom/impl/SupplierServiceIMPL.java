@@ -77,6 +77,23 @@ public class SupplierServiceIMPL implements SupplierService {
         }
     }
 
+    public List<SupplierDTO> getAllname(){
+        try {
+            List<Supplier> all = supplierRepo.getAllname();
+            List<SupplierDTO> dtos = new ArrayList<>();
+            if (all != null) {
+                for (Supplier Supplier : all) {
+                    dtos.add(convertEntityToDto(Supplier));
+                }
+                return dtos;
+            }else {
+                throw new RuntimeException("No users found");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Supplier convertDtoToEntity(SupplierDTO supplierDTO) {
         return modelMapper.map(supplierDTO, Supplier.class);
     }

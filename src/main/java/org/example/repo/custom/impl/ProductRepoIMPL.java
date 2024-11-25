@@ -1,5 +1,6 @@
 package org.example.repo.custom.impl;
 
+import org.example.entity.LowStock;
 import org.example.entity.Product;
 import org.example.repo.custom.ProductRepo;
 import org.example.util.DBConnection;
@@ -92,5 +93,62 @@ public class ProductRepoIMPL implements ProductRepo {
             products.add(product);
         }
         return products;
+    }
+
+    public List<LowStock> getLowStock() throws Exception{
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement(
+                "SELECT products.id,products.name, products.quantity , suppliers.name, suppliers.email" +
+                        " FROM products " +
+                        " JOIN suppliers ON products.supplier_id = suppliers.id" +
+                        " WHERE products.quantity=0");
+
+        ResultSet rs = ps.executeQuery();
+        List<LowStock> lowStocks = new ArrayList<>();
+
+        while (rs.next()) {
+            LowStock lowStock = new LowStock();
+            lowStock.setProductId(rs.getInt("products.id"));
+            lowStock.setProductName(rs.getString("products.name"));
+            lowStock.setSupplierName(rs.getString("suppliers.name"));
+            lowStock.setSupplierEmail(rs.getString("suppliers.email"));
+            lowStock.setQuantity(rs.getInt("products.quantity"));
+            lowStocks.add(lowStock);
+        }
+        return lowStocks;
+
+    }
+
+    public List<Product> getExpired(String date) throws Exception{
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement(
+                "SELECT * FROM products WHERE expiry_date <= ? ORDER BY expiry_date ASC");
+        ps.setString(1, date);
+        ResultSet rs = ps.executeQuery();
+        List<Product> products = new ArrayList<>();
+
+        while (rs.next()) {
+            Product product = new Product();
+            product.setId(rs.getInt("id"));
+            product.setName(rs.getString("name"));
+            product.setCategory(rs.getString("category"));
+            product.setPrice(rs.getDouble("price"));
+            product.setCost(rs.getDouble("cost"));
+            product.setQuantity(rs.getInt("quantity"));
+            product.setSupplierid(rs.getInt("supplier_id"));
+            product.setExpirydate(rs.getString("expiry_date"));
+            product.setDate(rs.getString("added_at"));
+
+            products.add(product);
+        }
+        return products;
+    }
+
+    public boolean addDiscount(String Discount ,Integer id) throws Exception{
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("UPDATE products SET discount=? WHERE id=?");
+        ps.setString(1, Discount);
+        ps.setInt(2, id);
+        return ps.executeUpdate()>0;
     }
 }
