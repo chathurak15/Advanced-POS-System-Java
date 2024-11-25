@@ -20,7 +20,7 @@
             <Insets left="15.0" right="30.0" />
          </padding>
          <children>
-            <VBox alignment="CENTER" layoutX="265.0" layoutY="239.0" prefHeight="284.0" prefWidth="348.0" styleClass="userCard" stylesheets="@../../../css/admin/addUser.css">
+            <VBox alignment="CENTER" layoutX="279.0" layoutY="132.0" prefHeight="284.0" prefWidth="348.0" styleClass="userCard" stylesheets="@../../../css/admin/addUser.css">
                <children>
                   <HBox prefHeight="77.0" prefWidth="0.0">
                      <children>

@@ -2,11 +2,15 @@ package org.example.controllers.product;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -32,11 +36,11 @@ public class ProductsController {
     public TableColumn<ProductTM,Button> colAction;
     public Button btnAddProduct;
     public AnchorPane submainPane;
-
+    public TextField txtSearch;
+    private ObservableList<ProductTM> masterData;
 
     private ProductServiceIMPL productService = new ProductServiceIMPL();
 
-   
 
     public void initialize() {
         loadTableData();
@@ -63,6 +67,8 @@ public class ProductsController {
                     ProductTM productTM = getTableRow().getItem();
                     if (productTM != null) {
                         HBox actionButtons = new HBox(10, productTM.getButton(), productTM.getButtonEdit());
+                        actionButtons.setAlignment(Pos.CENTER);
+                        actionButtons.setStyle("-fx-padding: 1;");
                         setGraphic(actionButtons);
                     }
                 }
@@ -112,6 +118,7 @@ public class ProductsController {
     }
 
     public void SearchOnClick(KeyEvent keyEvent) {
+        setupSearch();
     }
 
     public void SearchIconOnClick(MouseEvent mouseEvent) {
@@ -133,18 +140,38 @@ public class ProductsController {
             List<ProductTM> list = new ArrayList<>();
             List<ProductDTO> allProducts = productService.getAll();
             for (ProductDTO productDTO : allProducts) {
-                ProductTM productTM = convertDTOToTM (productDTO);
+                ProductTM productTM = convertDTOToTM(productDTO);
                 list.add(productTM);
             }
 
-            ObservableList<ProductTM> productTMS = FXCollections.observableArrayList(list);
-            tblProducts.setItems(productTMS);
+            masterData = FXCollections.observableArrayList(list);
+            tblProducts.setItems(masterData);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
+    }
+
+    private void setupSearch() {
+        FilteredList<ProductTM> filteredData = new FilteredList<>(masterData, p -> true);
+
+        // Add a listener to the search field
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(product -> {
+                // If search text is empty, display all rows
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+                return product.getName().toLowerCase().contains(lowerCaseFilter)||
+                        product.getCategory().toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+
+        tblProducts.setItems(filteredData);
     }
 
     //convert userDTO To UserTM and set values
@@ -158,9 +185,12 @@ public class ProductsController {
         productTM.setCost(productDTO.getCost());
         productTM.setExpdate(productDTO.getExpirydate());
 
-
-        // Set up Delete button
-        Button deleteButton = new Button("Delete");
+        Button deleteButton = new Button();
+        Image deleteIcon = new Image("image/delete.png"); // Provide the correct path to your delete icon
+        ImageView deleteIconView = new ImageView(deleteIcon);
+        deleteIconView.setFitWidth(20);  // Set icon size
+        deleteIconView.setFitHeight(20);
+        deleteButton.setGraphic(deleteIconView);
         deleteButton.setOnAction(event -> deleteProduct(productTM));
         productTM.setButton(deleteButton);
 

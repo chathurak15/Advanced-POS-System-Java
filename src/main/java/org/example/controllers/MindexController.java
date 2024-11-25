@@ -1,5 +1,7 @@
 package org.example.controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,8 +15,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -38,12 +43,13 @@ public class MindexController {
     public Text txtSuppliers;
     public Text txtUsers;
     public Text txtRole;
+    public Label lbDateandTime;
     private List<HBox> sidebarItems;
     private List<Text> sidebarTexts;
 
 
     public void initialize() {
-
+        updateDateTime();
         sidebarItems = List.of( lbDashboard, lbProducts, lbDiscount, lbShortExpiry, lbFoodRelationships, lbSuppliers, lbUsers );
         sidebarTexts = List.of( txtDashboard, txtProducts,txtDiscount,txtShortExpiry,txtFoodRelationships, txtSuppliers, txtUsers );
     }
@@ -159,5 +165,21 @@ public class MindexController {
             e.printStackTrace();
         }
 
+    }
+
+    private void updateDateTime() {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd   HH:mm");
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(
+                        Duration.seconds(1), // Update every second
+                        event -> {
+                            lbDateandTime.setText(LocalDateTime.now().format(formatter));
+                        }
+                )
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
+        timeline.play(); // Start the timeline
     }
 }

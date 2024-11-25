@@ -73,7 +73,7 @@ public class AddUserController {
                     }
                 }else if(addUser.equals("Duplicate User")) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);alert.setContentText("User Name or Email already exited! | Try again using uniqe details");alert.showAndWait();
+                    alert.setHeaderText(null);alert.setContentText("User Name or Email already exited! | Try again using unique details");alert.showAndWait();
 
                 }else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);

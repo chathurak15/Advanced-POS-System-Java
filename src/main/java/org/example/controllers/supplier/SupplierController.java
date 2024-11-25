@@ -5,9 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -57,6 +60,8 @@ public class SupplierController {
                     SupplierTM supplierTM = getTableRow().getItem();
                     if (supplierTM != null) {
                         HBox actionButtons = new HBox(10, supplierTM.getButton(), supplierTM.getButtonEdit());
+                        actionButtons.setAlignment(Pos.CENTER);
+                        actionButtons.setStyle("-fx-padding: 1;");
                         setGraphic(actionButtons);
                     }
                 }
@@ -162,7 +167,12 @@ public class SupplierController {
         supplierTM.setEmail(supplierDTO.getEmail());
         supplierTM.setNumber(supplierDTO.getNumber());
 
-        Button deleteButton = new Button("Delete");
+        Button deleteButton = new Button();
+        Image deleteIcon = new Image("image/delete.png"); // Provide the correct path to your delete icon
+        ImageView deleteIconView = new ImageView(deleteIcon);
+        deleteIconView.setFitWidth(20);  // Set icon size
+        deleteIconView.setFitHeight(20);
+        deleteButton.setGraphic(deleteIconView);
         deleteButton.setOnAction(event -> deleteSupplier(supplierTM));
         supplierTM.setButton(deleteButton);
 

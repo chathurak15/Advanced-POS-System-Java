@@ -5,6 +5,8 @@ import org.example.entity.User;
 import org.example.repo.custom.impl.UserRepoIMPL;
 import org.example.service.custom.UserService;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,7 @@ public class UserServiceIMPL implements UserService {
 //    Handles user login and conversion but should avoid returning null.
     public UserDTO loginUser(String username, String password) {
         try {
-            User user = userRepo.login(username, password);
+            User user = userRepo.login(username, passhash(password));
             if (user != null) {
                 return convertEntityToDTO(user);
             }
@@ -110,7 +112,7 @@ public class UserServiceIMPL implements UserService {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         user.setRole(userDTO.getRole());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(passhash(userDTO.getPassword()));
         return user;
     }
 
@@ -124,5 +126,32 @@ public class UserServiceIMPL implements UserService {
                 user.getRole(),
                 null // Exclude password in DTO
         );
+    }
+
+    private String passhash(String password) {
+        try {
+            // Get a MessageDigest instance for SHA-256
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            // Convert the input string into bytes and compute the hash
+            byte[] hashBytes = digest.digest(password.getBytes());
+
+            // Convert the hash bytes to a hexadecimal format
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                // Convert each byte to a hexadecimal string
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0'); // Add leading zero if needed
+                }
+                hexString.append(hex);
+            }
+
+            // Return the resulting hash as a string
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("SHA-256 algorithm not available", e);
+        }
     }
 }

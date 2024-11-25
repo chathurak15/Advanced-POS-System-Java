@@ -33,7 +33,7 @@
             </TableView>
             <HBox alignment="TOP_CENTER" layoutX="63.0" prefHeight="60.0" prefWidth="1093.0" AnchorPane.bottomAnchor="598.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TextField onKeyPressed="#SearchOnClick" prefHeight="33.0" prefWidth="336.0" promptText="Search Product">
+                  <TextField fx:id="txtSearch" onKeyPressed="#SearchOnClick" prefHeight="33.0" prefWidth="336.0" promptText="Search Product">
                      <font>
                         <Font name="Poppins Medium" size="16.0" />
                      </font>

@@ -2,11 +2,15 @@ package org.example.controllers.shortexpiry;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -14,6 +18,7 @@ import org.example.controllers.product.EditProductController;
 import org.example.dto.ProductDTO;
 import org.example.service.custom.impl.ProductServiceIMPL;
 import org.example.tm.ProductTM;
+import org.example.tm.SupplierTM;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +37,8 @@ public class ShortExpiryController {
     public TableColumn<ProductTM,String>colExpDate;
     public TableColumn<ProductTM, Button>colAction;
     public ComboBox cmbExp;
+    public TextField txtSearch;
+    private ObservableList<ProductTM> masterData;
 
     private final ProductServiceIMPL productService = new ProductServiceIMPL();
 
@@ -60,6 +67,8 @@ public class ShortExpiryController {
                     ProductTM productTM = getTableRow().getItem();
                     if (productTM != null) {
                         HBox actionButtons = new HBox(10, productTM.getButton(), productTM.getButtonEdit());
+                        actionButtons.setAlignment(Pos.CENTER);
+                        actionButtons.setStyle("-fx-padding: 1;");
                         setGraphic(actionButtons);
                     }
                 }
@@ -70,6 +79,7 @@ public class ShortExpiryController {
 
     }
     public void SearchOnClick(KeyEvent keyEvent) {
+        setupSearch();
     }
 
     public void expOnClick(ActionEvent actionEvent) {
@@ -107,8 +117,8 @@ public class ShortExpiryController {
                 list.add(product);
             }
 
-            ObservableList<ProductTM> productTMS = FXCollections.observableArrayList(list);
-            tblExpProduct.setItems(productTMS);
+            masterData = FXCollections.observableArrayList(list);
+            tblExpProduct.setItems(masterData);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -147,12 +157,22 @@ public class ShortExpiryController {
         productTM.setPrice(productDTO.getPrice());
         productTM.setExpdate(productDTO.getExpirydate());
 
-        Button deleteButton = new Button("Delete");
+        Button deleteButton = new Button();
+        Image deleteIcon = new Image("image/delete.png"); // Provide the correct path to your delete icon
+        ImageView deleteIconView = new ImageView(deleteIcon);
+        deleteIconView.setFitWidth(20);  // Set icon size
+        deleteIconView.setFitHeight(20);
+        deleteButton.setGraphic(deleteIconView);
         deleteButton.setOnAction(event -> deleteProduct(productTM));
         productTM.setButton(deleteButton);
 
-        // Set up Edit button
-        Button discountButton = new Button("Add Discount");
+        // Set up Add Discount button with icon
+        Button discountButton = new Button();
+        Image discountIcon = new Image("image/discounts.png"); // Provide the correct path to your discount icon
+        ImageView discountIconView = new ImageView(discountIcon);
+        discountIconView.setFitWidth(20);  // Set icon size
+        discountIconView.setFitHeight(20);
+        discountButton.setGraphic(discountIconView);
         discountButton.setOnAction(event -> AddDiscount(productTM));
         productTM.setButtonEdit(discountButton);
 
@@ -196,5 +216,24 @@ public class ShortExpiryController {
                 new Alert(Alert.AlertType.ERROR, "Error deleting product. Please contact Developer.").show();
             }
         }
+    }
+
+    private void setupSearch() {
+        FilteredList<ProductTM> filteredData = new FilteredList<>(masterData, p -> true);
+
+        // Add a listener to the search field
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(product -> {
+                // If search text is empty, display all rows
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+                return product.getName().toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+
+        tblExpProduct.setItems(filteredData);
     }
 }
