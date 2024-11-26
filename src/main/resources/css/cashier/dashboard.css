@@ -9,7 +9,7 @@
 .summary-card{
     -fx-text-fill: white;
     -fx-background-radius: 25;
-    -fx-background-color: #5500ff;
+    -fx-background-color: #053769;
 }
 .summary-card-text{
     -fx-text-fill: white;
@@ -18,9 +18,9 @@
     -fx-text-fill: white;
 }
 .proceedbutton{
-    -fx-text-fill: white;
+    -fx-text-fill: #000000;
     -fx-background-radius: 15;
-    -fx-background-color: #000000;
+    -fx-background-color: #ffffff;
 
 }
 .date{
@@ -57,4 +57,5 @@
     -fx-pref-height: 35;
     -fx-font-size: 15px;
     -fx-font-family: "Poppins SemiBold", sans-serif;
+    -fx-alignment: center;
 }
