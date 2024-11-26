@@ -14,12 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import org.example.controllers.product.EditProductController;
 import org.example.dto.ProductDTO;
 import org.example.service.custom.impl.ProductServiceIMPL;
 import org.example.tm.ProductTM;
-import org.example.tm.SupplierTM;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

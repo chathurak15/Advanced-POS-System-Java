@@ -181,12 +181,6 @@ public class EditProductController {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-
-                        // Disable dates before the expiration date
-                        if (item != null && expDate != null && item.isBefore(expDate)) {
-                            setDisable(true);
-                            setStyle("-fx-background-color: #ffc0cb;");
-                        }
                     }
                 });
             }

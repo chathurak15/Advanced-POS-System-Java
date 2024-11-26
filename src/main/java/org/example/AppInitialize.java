@@ -20,7 +20,7 @@ public class AppInitialize extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/stockmanager/Index.fxml")));
+            Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/cashier/Dashboard.fxml")));
             Scene scene = new Scene(load);
             primaryStage.setScene(scene);
             primaryStage.show();

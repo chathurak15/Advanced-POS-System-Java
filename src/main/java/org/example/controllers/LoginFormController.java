@@ -61,7 +61,20 @@ public class LoginFormController {
 
                 }
             }
-            case "CASHIER" -> System.out.println("Navigating to Cashier Dashboard");
+            case "CASHIER" -> {
+                try {
+                    Stage window = (Stage) txtUserName.getScene().getWindow();
+                    window.close();
+                    Stage stage = new Stage();
+                    Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/cashier/Dashboard.fxml")));
+                    Scene scene = new Scene(load);
+                    stage.setScene(scene);
+                    stage.show();
+
+                } catch (IOException e) {
+                    new Alert(Alert.AlertType.ERROR,  "Dashboard issue. please contact Developer").show();
+                }
+            }
             case "STOCK MANAGER" -> {
                 try {
                     Stage window = (Stage) txtUserName.getScene().getWindow();

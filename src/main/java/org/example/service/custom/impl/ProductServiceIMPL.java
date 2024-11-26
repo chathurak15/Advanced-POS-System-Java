@@ -2,9 +2,11 @@ package org.example.service.custom.impl;
 
 import org.example.dto.LowStockDTO;
 import org.example.dto.ProductDTO;
+import org.example.dto.SupplierDTO;
 import org.example.dto.UserDTO;
 import org.example.entity.LowStock;
 import org.example.entity.Product;
+import org.example.entity.Supplier;
 import org.example.entity.User;
 import org.example.repo.custom.ProductRepo;
 import org.example.repo.custom.impl.ProductRepoIMPL;
@@ -52,7 +54,11 @@ public class ProductServiceIMPL implements ProductService {
 
     @Override
     public ProductDTO search(Integer integer) {
-        return null;
+        try {
+            return convertEntityToDTO(productRepo.search(integer));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -122,6 +128,23 @@ public class ProductServiceIMPL implements ProductService {
     public boolean AddDiscount(String discount, Integer id) {
         try {
             return productRepo.addDiscount(discount,id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<ProductDTO> getAllname(){
+        try {
+            List<Product> all = productRepo.getAllname();
+            List<ProductDTO> dtos = new ArrayList<>();
+            if (all != null) {
+                for (Product product : all) {
+                    dtos.add(convertEntityToDTO(product));
+                }
+                return dtos;
+            }else {
+                throw new RuntimeException("No users found");
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

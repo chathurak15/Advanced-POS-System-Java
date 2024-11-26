@@ -2,6 +2,7 @@ package org.example.repo.custom.impl;
 
 import org.example.entity.LowStock;
 import org.example.entity.Product;
+import org.example.entity.Supplier;
 import org.example.repo.custom.ProductRepo;
 import org.example.util.DBConnection;
 
@@ -70,6 +71,25 @@ public class ProductRepoIMPL implements ProductRepo {
 
     @Override
     public Product search(Integer integer) throws Exception {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM products WHERE id = ?");
+        ps.setInt(1, integer);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            Product product = new Product();
+            product.setId(rs.getInt("id"));
+            product.setName(rs.getString("name"));
+            product.setCategory(rs.getString("category"));
+            product.setPrice(rs.getDouble("price"));
+            product.setCost(rs.getDouble("cost"));
+            product.setQuantity(rs.getInt("quantity"));
+            product.setSupplierid(rs.getInt("supplier_id"));
+            product.setExpirydate(rs.getString("expiry_date"));
+            product.setDate(rs.getString("added_at"));
+            product.setDiscount(rs.getString("discount"));
+            return product;
+        }
         return null;
     }
 
@@ -150,5 +170,19 @@ public class ProductRepoIMPL implements ProductRepo {
         ps.setString(1, Discount);
         ps.setInt(2, id);
         return ps.executeUpdate()>0;
+    }
+
+    public List<Product> getAllname() throws Exception {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT id,name FROM products");
+        ResultSet rs = ps.executeQuery();
+        List<Product> products = new ArrayList<>();
+        while(rs.next()){
+            Product product = new Product();
+            product.setId(rs.getInt("id"));
+            product.setName(rs.getString("name"));
+            products.add(product);
+        }
+        return products;
     }
 }

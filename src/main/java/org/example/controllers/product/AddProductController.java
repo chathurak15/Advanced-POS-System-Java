@@ -125,7 +125,6 @@ public class AddProductController {
             String selectedName = cmbSupplier.getValue().toString();
             if (selectedName != null) {
                 Integer supplierId = supplierMap.get(selectedName);
-                System.out.println("Selected Supplier ID: " + supplierId);
             }
         });
 
