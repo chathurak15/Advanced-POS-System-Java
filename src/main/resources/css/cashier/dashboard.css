@@ -1,0 +1,60 @@
+.background{
+    -fx-background-color: rgba(173, 234, 250, 0.22);
+
+}
+.header{
+    -fx-background-color: #ffffff;
+}
+
+.summary-card{
+    -fx-text-fill: white;
+    -fx-background-radius: 25;
+    -fx-background-color: #5500ff;
+}
+.summary-card-text{
+    -fx-text-fill: white;
+}
+.summary-text{
+    -fx-text-fill: white;
+}
+.proceedbutton{
+    -fx-text-fill: white;
+    -fx-background-radius: 15;
+    -fx-background-color: #000000;
+
+}
+.date{
+
+}
+.name{
+    -fx-text-fill: white;
+}
+.logo{
+
+}
+
+.combo-box{
+    -fx-background-radius: 10;
+    -fx-font-size: 15px;
+    -fx-font-family: "Poppins Medium", sans-serif;
+    /*-fx-background-color: #5500ff;*/
+}
+.textfield{
+    -fx-background-radius: 10;
+}
+.addButton{
+    -fx-background-radius: 10;
+    -fx-font-size: 14px;
+    -fx-font-family: "Poppins Medium", sans-serif;
+    -fx-background-color: #000000;
+}
+.table-view{
+    -fx-background-radius: 10;
+    -fx-font-size: 14px;
+    -fx-font-family: "Poppins Medium", sans-serif;
+}
+.table-header{
+    -fx-pref-height: 35;
+    -fx-font-size: 15px;
+    -fx-font-family: "Poppins SemiBold", sans-serif;
+}
