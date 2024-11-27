@@ -17,6 +17,8 @@ import org.example.dto.OrderDTO;
 import org.example.dto.OrderItemDTO;
 import org.example.dto.ProductDTO;
 import org.example.entity.OrderItem;
+import org.example.service.AIService;
+import org.example.service.custom.OrderItemService;
 import org.example.service.custom.OrderService;
 import org.example.service.custom.impl.ProductServiceIMPL;
 import org.example.tm.OrderItemTM;
@@ -59,6 +61,7 @@ public class DashboardController {
     private static final int MIN_DISCOUNT = 0;
 
     private final ProductServiceIMPL productService = new ProductServiceIMPL();
+    private final AIService aiService = new AIService();
     private final OrderService orderService = new OrderService();
     private ObservableList<OrderItemTM> observableOrderItems = FXCollections.observableArrayList();
     private OrderItemTM orderItemTM = new OrderItemTM();
@@ -136,6 +139,9 @@ public class DashboardController {
                 }
 
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Done!");
+                totalPrice = 0;
+                DiscountPrice = 0;
+                subtotal = 0;
 
             } else {
                showAlert(Alert.AlertType.ERROR, "Error", "Failed to create order.");

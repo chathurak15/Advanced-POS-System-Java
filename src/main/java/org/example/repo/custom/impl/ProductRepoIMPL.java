@@ -9,6 +9,7 @@ import org.example.util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,26 +71,34 @@ public class ProductRepoIMPL implements ProductRepo {
     }
 
     @Override
-    public Product search(Integer integer) throws Exception {
-        Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM products WHERE id = ?");
-        ps.setInt(1, integer);
-        ResultSet rs = ps.executeQuery();
+    public Product search(Integer integer) {
+        Connection connection = null;
+        try {
+            connection = DBConnection.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM products WHERE id = ?");
+            ps.setInt(1, integer);
+            ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
-            Product product = new Product();
-            product.setId(rs.getInt("id"));
-            product.setName(rs.getString("name"));
-            product.setCategory(rs.getString("category"));
-            product.setPrice(rs.getDouble("price"));
-            product.setCost(rs.getDouble("cost"));
-            product.setQuantity(rs.getInt("quantity"));
-            product.setSupplierid(rs.getInt("supplier_id"));
-            product.setExpirydate(rs.getString("expiry_date"));
-            product.setDate(rs.getString("added_at"));
-            product.setDiscount(rs.getString("discount"));
-            return product;
+            if (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt("id"));
+                product.setName(rs.getString("name"));
+                product.setCategory(rs.getString("category"));
+                product.setPrice(rs.getDouble("price"));
+                product.setCost(rs.getDouble("cost"));
+                product.setQuantity(rs.getInt("quantity"));
+                product.setSupplierid(rs.getInt("supplier_id"));
+                product.setExpirydate(rs.getString("expiry_date"));
+                product.setDate(rs.getString("added_at"));
+                product.setDiscount(rs.getString("discount"));
+                return product;
+            }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
         return null;
     }
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="submainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../../css/admin/foodReletion.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.ai.FoodRelationshipController">
+   <children>
+      <AnchorPane prefHeight="692.0" prefWidth="803.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TabPane fx:id="tabPane" prefHeight="658.0" prefWidth="1190.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Suggested">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="636.0" prefWidth="1190.0" stylesheets="@../../../css/admin/foodReletion.css">
+                           <children>
+                              <TableView fx:id="tblRelationProduct" layoutY="41.0" prefHeight="581.0" prefWidth="1181.0" styleClass="product-table" stylesheets="@../../../css/admin/foodReletion.css" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="41.0">
+                                <columns>
+                                  <TableColumn fx:id="colFirstProduct" prefWidth="548.0" styleClass="product-table-header" text="First Product Name" />
+                                    <TableColumn fx:id="colSecondProduct" prefWidth="506.0" styleClass="product-table-header" text="Second Product Name" />
+                                    <TableColumn fx:id="colAction" prefWidth="91.0" styleClass="product-table-header" text="Action" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <TextField fx:id="txtSearch" layoutX="782.0" layoutY="5.0" onKeyPressed="#SearchOnClick" prefHeight="33.0" prefWidth="399.0" promptText="Search Product">
+                                 <font>
+                                    <Font name="Poppins Medium" size="16.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="activetab" text="Active">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="1093.0" AnchorPane.bottomAnchor="598.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="548.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+         <padding>
+            <Insets left="15.0" right="30.0" />
+         </padding>
+      </AnchorPane>
+   </children>
+   <padding>
+      <Insets bottom="25.0" left="40.0" right="25.0" top="40.0" />
+   </padding>
+</AnchorPane>

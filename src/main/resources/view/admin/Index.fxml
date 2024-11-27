@@ -214,29 +214,6 @@
                         </Text>
                     </children>
                 </HBox>
-                <HBox fx:id="lbDiscount" alignment="CENTER_LEFT" onMouseClicked="#DiscountOnclick" prefHeight="50.0" prefWidth="283.0">
-                    <padding>
-                        <Insets left="30.0" />
-                    </padding>
-                    <children>
-                        <ImageView fitHeight="33.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../image/discounts.png" />
-                            </image>
-                        </ImageView>
-                        <Text fx:id="txtDiscount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount" wrappingWidth="180.58333587646484">
-                            <font>
-                                <Font name="Poppins SemiBold" size="20.0" />
-                            </font>
-                            <HBox.margin>
-                                <Insets left="15.0" />
-                            </HBox.margin>
-                        </Text>
-                    </children>
-                    <VBox.margin>
-                        <Insets top="15.0" />
-                    </VBox.margin>
-                </HBox>
                 <HBox fx:id="lbShortExpiry" alignment="CENTER_LEFT" layoutX="10.0" layoutY="224.0" onMouseClicked="#ShortExpiryOnClick" prefHeight="50.0" prefWidth="283.0">
                     <padding>
                         <Insets left="30.0" />

@@ -1,0 +1,59 @@
+
+.product-table {
+    -fx-border-radius: 15; /* Rounded table corners */
+    -fx-background-radius: 15;
+    /*-fx-border-color: linear-gradient(to right, #000a4c, #007acc); !* Gradient border for modern AI feel *!*/
+    -fx-background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 5); /* Subtle shadow for depth */
+    -fx-padding: 10px; /* Adds spacing around the table */
+}
+.product-table-header {
+    -fx-pref-height: 50; /* Slightly taller header */
+    -fx-text-fill: #053769; /* White text for contrast */
+    -fx-font-size: 15px; /* Modern font size */
+    -fx-font-family: "Poppins SemiBold"; /* Elegant bold font */
+    /*-fx-background-color: linear-gradient(to bottom, #053769, #002a8e); !* Gradient header background *!*/
+    -fx-border-width: 0 0 2px 0; /* Subtle bottom border */
+    -fx-border-color: #ffffff; /* Border color for distinction */
+    -fx-alignment: center; /* Center-align text */
+}
+
+/* Row Hover Effect */
+.product-table-row:hover {
+    -fx-background-color: rgba(0, 42, 142, 0.2); /* Slightly darker blue on hover */
+    -fx-cursor: hand; /* Pointer cursor on hover */
+}
+
+/* Table Cell Styling */
+.product-table-cell {
+    -fx-text-fill: #ffffff; /* Dark blue text for readability */
+    -fx-font-size: 14px; /* Clean font size */
+    -fx-font-family: "Poppins Regular"; /* Simple and modern font */
+    -fx-padding: 8px; /* Padding inside cells */
+    -fx-alignment: center-left; /* Align text to the left */
+}
+
+/* Action Button Styling in Table */
+.action-button {
+    -fx-background-color: linear-gradient(to bottom right, #000a4c, #007acc); /* Gradient background for action buttons */
+    -fx-text-fill: #ffffff; /* White text for contrast */
+    -fx-border-radius: 8; /* Rounded corners */
+    -fx-padding: 6px 12px; /* Add padding for button */
+    -fx-cursor: hand; /* Pointer cursor on hover */
+    -fx-font-size: 13px; /* Button text size */
+    -fx-font-family: "Poppins Medium"; /* Modern font */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 2); /* Subtle shadow for depth */
+}
+
+.action-button:hover {
+    -fx-background-color: linear-gradient(to bottom right, #fac1d9, #f08ab8); /* Softer gradient on hover */
+    -fx-text-fill: #000000; /* Black text */
+    -fx-scale-x: 1.1; /* Slightly enlarge button on hover */
+    -fx-scale-y: 1.1;
+    -fx-transition: 0.3s ease-in-out; /* Smooth hover transition */
+}
+.tab-pane{
+    -fx-font-size: 16;
+    -fx-font-family: "Poppins SemiBold";
+    -fx-alignment: center-left;
+}

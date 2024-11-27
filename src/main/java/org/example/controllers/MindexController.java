@@ -36,8 +36,6 @@ public class MindexController {
     public HBox lbSuppliers;
     public HBox lbFoodRelationships;
     public HBox lbShortExpiry;
-    public HBox lbDiscount;
-    public Text txtDiscount;
     public Text txtShortExpiry;
     public Text txtFoodRelationships;
     public Text txtSuppliers;
@@ -50,8 +48,8 @@ public class MindexController {
 
     public void initialize() {
         updateDateTime();
-        sidebarItems = List.of( lbDashboard, lbProducts, lbDiscount, lbShortExpiry, lbFoodRelationships, lbSuppliers, lbUsers );
-        sidebarTexts = List.of( txtDashboard, txtProducts,txtDiscount,txtShortExpiry,txtFoodRelationships, txtSuppliers, txtUsers );
+        sidebarItems = List.of( lbDashboard, lbProducts, lbShortExpiry, lbFoodRelationships, lbSuppliers, lbUsers );
+        sidebarTexts = List.of( txtDashboard, txtProducts,txtShortExpiry,txtFoodRelationships, txtSuppliers, txtUsers );
     }
 
 
@@ -84,11 +82,11 @@ public class MindexController {
 
     }
 
-    public void DiscountOnclick(MouseEvent mouseEvent) {
-        setActiveTab(lbDiscount);
-        setActiveText(txtDiscount);
-        loadUI("admin/discount/Discount");
-    }
+//    public void DiscountOnclick(MouseEvent mouseEvent) {
+//        setActiveTab(lbDiscount);
+//        setActiveText(txtDiscount);
+//        loadUI("admin/discount/Discount");
+//    }
 
     public void ShortExpiryOnClick(MouseEvent mouseEvent) {
         setActiveTab(lbShortExpiry);
@@ -99,7 +97,7 @@ public class MindexController {
     public void FoodRelationshipsOnClick(MouseEvent mouseEvent) {
         setActiveTab(lbFoodRelationships);
         setActiveText(txtFoodRelationships);
-//        loadUI("admin/products");
+        loadUI("admin/foodRelationships/FoodRelationships");
     }
 
     public void SuppliersOnClick(MouseEvent mouseEvent) {
