@@ -19,11 +19,17 @@ public class OrderRepo {
                 Statement.RETURN_GENERATED_KEYS);
 
         // Set values for placeholders
-        ps.setString(1, order.getCustomerNumber());
         ps.setDouble(2, order.getTotalAmount());
         ps.setDouble(3, order.getTotalDiscount());
         ps.setInt(4, order.getTotalItems());
         ps.setString(5, order.getBillDate());
+
+        if(order.getCustomerNumber()==null || order.getCustomerNumber().equals("+94")){
+            ps.setNull(1, java.sql.Types.VARCHAR);
+        }else {
+            ps.setString(1, order.getCustomerNumber());
+        }
+
 
         // Execute update and check affected rows
         int affectedRows = ps.executeUpdate();

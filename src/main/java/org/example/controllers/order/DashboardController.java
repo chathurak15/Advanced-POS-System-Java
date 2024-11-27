@@ -23,12 +23,10 @@ import org.example.tm.OrderItemTM;
 import org.example.tm.ProductTM;
 import org.example.tm.SupplierTM;
 
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DashboardController {
 
@@ -36,6 +34,7 @@ public class DashboardController {
     public Text txtName;
     public ComboBox cmbProduct;
     public TextField txtQuantity;
+    public TextField txtNumber;
     public TableView<OrderItemTM> tblProducts;
     public TableColumn<OrderItemTM,Integer>  colId;
     public TableColumn<OrderItemTM,String>  colName;
@@ -61,19 +60,15 @@ public class DashboardController {
 
     private final ProductServiceIMPL productService = new ProductServiceIMPL();
     private final OrderService orderService = new OrderService();
-    private ObservableList<ProductDTO> products = FXCollections.observableArrayList();
     private ObservableList<OrderItemTM> observableOrderItems = FXCollections.observableArrayList();
     private OrderItemTM orderItemTM = new OrderItemTM();
-    private List<OrderItemTM> orderItems = FXCollections.observableArrayList();
-//    private ProductDTO productDTO = new ProductDTO();
+    private List<String> orderItems = FXCollections.observableArrayList();
 
     public void initialize() {
         cmbPaymentMethod.getItems().addAll("Cash", "Card");
         updateDateTime();
         getSelectedProductId();
         visulizeTable();
-
-
     }
 
     private boolean isProductAlreadyAdded(int productId) {
@@ -87,7 +82,7 @@ public class DashboardController {
         }
 
         String quantityText = txtQuantity.getText();
-        if (Integer.parseInt(quantityText)<=0|| !quantityText.matches("\\d+")) {
+        if (Integer.parseInt(quantityText)==0|| !quantityText.matches("\\d+")) {
             showAlert(Alert.AlertType.ERROR, "Invalid Quantity", "Please enter a valid numeric quantity.");
             return;
         }
@@ -104,73 +99,52 @@ public class DashboardController {
             showAlert(Alert.AlertType.ERROR, "Insufficient Stock", "Requested quantity exceeds available stock.");
             return;
         }
-
         productDTO.setQuantity(quantity);
 
         // Add product to the table
         OrderItemTM newOrderItem = convertDTOtoTM(productDTO);
         observableOrderItems.add(newOrderItem);
-        tblProducts.setItems(observableOrderItems);
 
+        orderItems.add(String.valueOf(orderItemTMtolist(newOrderItem)));
+
+        tblProducts.setItems(observableOrderItems);
         updateTotals(productDTO);
 
         cmbProduct.getSelectionModel().clearSelection();
         txtQuantity.clear();
     }
 
-
-    private void updateTotals(ProductDTO productDTO) {
-        productcount = products.size();
-        totalPrice += productDTO.getPrice() * productDTO.getQuantity();
-        subtotal += orderItemTM.getTotalPrice();
-        DiscountPrice = totalPrice - subtotal;
-
-        txtProducts.setText(String.valueOf(productcount));
-        txtTotalPrice.setText(String.valueOf(totalPrice));
-        txtDiscount.setText(String.valueOf(DiscountPrice));
-        txtSubtotal.setText(String.valueOf(subtotal));
-    }
-
     public void proceedOnClick(ActionEvent actionEvent) {
         try {
-
             int orderId = orderService.addOrder(collectOrderData());
 
             if (orderId > 0) {
-                // Loop through all rows in the table
-                for (OrderItemTM orderItemTM : tblProducts.getItems()) {
+                for (String orderItem : orderItems) {
                     OrderItemDTO orderItemDTO = new OrderItemDTO();
+                    String[] parts = orderItem.trim().replaceAll("[\\[\\]]", "").split(",");
 
-                    // Set details for each order item
-                    orderItemDTO.setProductId(orderItemTM.getOrderItemId());
+                    orderItemDTO.setProductId(Integer.parseInt(parts[0].trim()));
                     orderItemDTO.setOrderId(orderId);
-                    orderItemDTO.setQuantity(orderItemTM.getQuantity());
-                    orderItemDTO.setSellPrice(orderItemTM.getSellPrice());
-
-                    // Insert the order item into the database
+                    orderItemDTO.setQuantity(Integer.parseInt(parts[1].trim()));
+                    orderItemDTO.setSellPrice(Double.parseDouble(parts[2].trim()));
                     boolean isInserted = orderService.addOrderItem(orderItemDTO);
-                    System.out.println("Inserting Order Item: " + orderItemTM);
 
-
-                    // Handle insertion failure for any row
                     if (!isInserted) {
-                        showAlert(Alert.AlertType.ERROR, "Error", "Failed to add order item for product ID: " + orderItemDTO.getProductId());
-                        return; // Stop further processing
+                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to add order item for product ID: " + orderItemDTO.getProductId());
+                     return; // Stop further processing
                     }
                 }
 
-                // If all rows are inserted successfully
-                showAlert(Alert.AlertType.INFORMATION, "Success", "All order items have been added successfully!");
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Done!");
+
             } else {
-                showAlert(Alert.AlertType.ERROR, "Error", "Failed to create order.");
+               showAlert(Alert.AlertType.ERROR, "Error", "Failed to create order.");
             }
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Exception", "An error occurred: " + e.getMessage());
         }
     }
-
-
 
     private int getSelectedProductId() {
         Map<String, Integer> productMap = new HashMap<>();
@@ -228,22 +202,6 @@ public class DashboardController {
         }
     }
 
-//    public void loadTableData() {
-//        try {
-//            List<OrderItemTM> list = new ArrayList<>();
-//            for (ProductDTO productDTO : products) {
-//                OrderItemTM orderItemTM = convertDTOtoTM(productDTO);
-//                list.add(orderItemTM);
-//            }
-//
-//            observableOrderItems = FXCollections.observableArrayList(list); // Update masterData
-//            tblProducts.setItems(observableOrderItems);
-//
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
     public void visulizeTable(){
         colId.setCellValueFactory(new PropertyValueFactory<>("orderItemId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -296,11 +254,29 @@ public class DashboardController {
 //            observableOrderItems.remove(orderItemTM);
 //            updateTotals(productDTO);
         });
-
         orderItemTM.setDeleteButton(deleteButton);
 
-        orderItems.add(orderItemTM);
         return orderItemTM;
+    }
+
+    private List<String> orderItemTMtolist(OrderItemTM orderItemTM) {
+        List<String> list = new ArrayList<>();
+        list.add(String.valueOf(orderItemTM.getOrderItemId()));
+        list.add(String.valueOf(orderItemTM.getQuantity()));
+        list.add(String.valueOf(orderItemTM.getTotalPrice()));
+        return list;
+    }
+
+    private void updateTotals(ProductDTO productDTO) {
+        productcount = observableOrderItems.size();
+        totalPrice += productDTO.getPrice() * productDTO.getQuantity();
+        subtotal += orderItemTM.getTotalPrice();
+        DiscountPrice = totalPrice - subtotal;
+
+        txtProducts.setText(String.valueOf(productcount));
+        txtTotalPrice.setText(String.valueOf(totalPrice));
+        txtDiscount.setText(String.valueOf(DiscountPrice));
+        txtSubtotal.setText(String.valueOf(subtotal));
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {
@@ -317,23 +293,11 @@ public class DashboardController {
         orderDTO.setTotalAmount(subtotal);
         orderDTO.setBillDate(date());
         orderDTO.setTotalDiscount(DiscountPrice);
-        orderDTO.setCustomerNumber("0789362885");
-
+        orderDTO.setCustomerNumber("+94"+txtNumber.getText());
         return orderDTO;
     }
 
-    private OrderItemDTO collectOrderItemData(int index, int orderid){
-        OrderItemDTO orderItemDTO = new OrderItemDTO();
-        orderItemDTO.setProductId(observableOrderItems.get(index).getOrderItemId());
-        orderItemDTO.setOrderId(orderid);
-        orderItemDTO.setQuantity(observableOrderItems.get(index).getQuantity());
-        orderItemDTO.setSellPrice(observableOrderItems.get(index).getSellPrice());
-
-        return orderItemDTO;
-    }
-
     private void updateDateTime() {
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd   HH:mm");
 
         Timeline timeline = new Timeline(
@@ -353,7 +317,5 @@ public class DashboardController {
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }
-
-
 
 }
