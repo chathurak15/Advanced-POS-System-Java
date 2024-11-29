@@ -71,10 +71,8 @@ public class AddOffer {
         List<String>products=  cmbFree.getItems();
         for (String item : products) {
             Integer productId = productMap.get(item);
-            System.out.println("Processing product ID: " + productId);
             if (productId != null && !productId.equals(freeProductId)) {
                 mainProductId = productId;
-                System.out.println("Main product ID determined: " + mainProductId);
                 break;
             }
         }
@@ -88,9 +86,23 @@ public class AddOffer {
 
         boolean rs = offerService.saveOffer(mainProductId, freeProductId);
         if (rs) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Product added successfully.");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Offer added successfully!");
+            alert.showAndWait();
+
+            try {
+                addDiscountPane.getChildren().clear();
+                Parent user = FXMLLoader.load(getClass().getResource("/view/admin/foodRelationships/FoodRelationships.fxml"));
+                addDiscountPane.getChildren().add(user);
+
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, "UI- Load error || please Contact Developer||").show();
+                e.printStackTrace();
+            }
         }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Unable to save Offer Try  Again.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);alert.setContentText("Offer add Failed! Try again!");alert.showAndWait();;
         }
 
     }

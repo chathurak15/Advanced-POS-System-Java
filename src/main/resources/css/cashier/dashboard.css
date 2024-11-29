@@ -32,6 +32,14 @@
 .logo{
 
 }
+.Logout-button{
+    -fx-background-color: #fac1d9;
+    -fx-background-color: #fac1d9;
+    -fx-background-radius: 20 20 20 20 ;
+    -fx-text-fill: #000000;
+    -fx-font-family: "Poppins Medium";
+    -fx-font-size: 15px;
+}
 
 .combo-box{
     -fx-background-radius: 10;

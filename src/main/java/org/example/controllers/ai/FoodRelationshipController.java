@@ -22,6 +22,7 @@ import org.example.tm.RelationalOfferTM;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class FoodRelationshipController {
     public TextField txtSearch;
@@ -46,8 +47,8 @@ public class FoodRelationshipController {
     public void initialize() {
         visulizeTable();
         visulizeOfferTable();
-        loadTable();
-        loadOfferTable();
+        loadTableData();
+        loadOfferTableData();
     }
 
     public void visulizeTable() {
@@ -66,7 +67,7 @@ public class FoodRelationshipController {
     }
 
     //relationship offer table
-    public void loadOfferTable() {
+    public void loadOfferTableData() {
         try {
             List<RelationalOfferTM> list = new ArrayList<>();
             offerService.getAll();
@@ -85,7 +86,7 @@ public class FoodRelationshipController {
 
 
     /// relationship table
-    public void loadTable() {
+    public void loadTableData() {
         try {
             List<RelationsNormal> relationsNormalList = (List<RelationsNormal>) aiService.createDataset();
 
@@ -147,6 +148,23 @@ public class FoodRelationshipController {
     }
 
     private void deleteOffer(RelationalOfferTM relationalOfferTM) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this offer?", ButtonType.YES, ButtonType.NO);
+        alert.setHeaderText(null);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES) {
+            String rs = offerService.deleteOffer(relationalOfferTM.getOfferId());
+            if (rs != null) {
+                if(rs=="Deleted"){
+                    loadOfferTableData();
+                }else if(rs=="SQL"){
+                    Alert infoAlert = new Alert(Alert.AlertType.INFORMATION,"Something went wrong! Try again!");
+                    infoAlert.setHeaderText(null);infoAlert.showAndWait();
+                }else if(rs =="Error"){
+                    Alert infoAlert = new Alert(Alert.AlertType.INFORMATION,"Delete Failed! | Contact Developer");
+                    infoAlert.setHeaderText(null);infoAlert.showAndWait();
+                }
+            }
+        }
     }
 
     private void setupSearch() {

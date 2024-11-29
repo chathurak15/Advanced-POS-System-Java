@@ -80,6 +80,17 @@ public class OfferService {
         }
     }
 
+    public String deleteOffer(Integer offerId){
+        try {
+            offerRepo.delete(offerId);
+            return "Deleted";
+        }catch (SQLException e){
+            return "SQL";
+        }
+        catch (Exception e) {
+            return "Error";
+        }
+    }
 
     public RelationshipOfferDTO convertEntityToDto(RelationshipOffer relationshipOffer){
         return modelMapper.map(relationshipOffer, RelationshipOfferDTO.class);

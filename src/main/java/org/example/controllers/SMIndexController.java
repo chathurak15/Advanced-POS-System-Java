@@ -103,6 +103,7 @@ public class SMIndexController {
 
     public void LogoutOnAction(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to log out?", ButtonType.YES , ButtonType.NO);
+        alert.setHeaderText(null);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.YES) {
 

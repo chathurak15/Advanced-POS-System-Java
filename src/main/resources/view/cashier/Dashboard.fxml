@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane nodeOrientation="LEFT_TO_RIGHT" stylesheets="@../../css/cashier/dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.order.DashboardController">
+<AnchorPane fx:id="mainPane" nodeOrientation="LEFT_TO_RIGHT" stylesheets="@../../css/cashier/dashboard.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.order.DashboardController">
    <children>
       <AnchorPane layoutX="-4.0" layoutY="-1.0" styleClass="background" stylesheets="@../../css/cashier/dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -53,11 +53,19 @@
                               </LinearGradient>
                            </fill>
                         </Text>
-                        <Text fx:id="txtDate" strokeType="OUTSIDE" strokeWidth="0.0" text="2024/11/25 10:39" textAlignment="RIGHT" wrappingWidth="1156.13671875">
+                        <Text fx:id="txtDate" strokeType="OUTSIDE" strokeWidth="0.0" text="2024/11/25 10:39" textAlignment="RIGHT" wrappingWidth="1045.13671875">
                            <font>
                               <Font name="Poppins SemiBold" size="21.0" />
                            </font>
                         </Text>
+                        <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#LogoutOnAction" prefHeight="35.0" prefWidth="99.0" styleClass="Logout-button" text="Logout" textAlignment="CENTER">
+                           <font>
+                              <Font name="Poppins Medium" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />

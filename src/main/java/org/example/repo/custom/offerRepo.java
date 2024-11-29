@@ -73,4 +73,11 @@ public class offerRepo {
         }
         return list;
     }
+
+    public boolean delete(Integer id) throws Exception{
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM relationashipoffers WHERE id=?");
+        ps.setInt(1, id);
+        return ps.executeUpdate()>0;
+    }
 }

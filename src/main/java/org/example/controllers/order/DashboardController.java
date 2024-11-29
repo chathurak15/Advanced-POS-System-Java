@@ -5,13 +5,18 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.dto.OrderDTO;
 import org.example.dto.OrderItemDTO;
@@ -26,6 +31,7 @@ import org.example.tm.OrderItemTM;
 import org.example.tm.ProductTM;
 import org.example.tm.SupplierTM;
 
+import java.io.IOException;
 import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -64,6 +70,7 @@ public class DashboardController {
     private final ProductServiceIMPL productService = new ProductServiceIMPL();
     private final AIService aiService = new AIService();
     private final OrderService orderService = new OrderService();
+    public AnchorPane mainPane;
     private ObservableList<OrderItemTM> observableOrderItems = FXCollections.observableArrayList();
     private final OfferService offerService = new OfferService();
     private OrderItemTM orderItemTM = new OrderItemTM();
@@ -84,7 +91,7 @@ public class DashboardController {
         String quantityText = txtQuantity.getText();
         int productId = getSelectedProductId();
         ProductDTO productDTO = productService.search(productId);
-        quantity = Integer.parseInt(quantityText);
+        quantity = Integer.parseInt((quantityText));
 
         if (getSelectedProductId() <= 0) {
             showAlert(Alert.AlertType.ERROR, "Product Select", "Please Select Product First!");
@@ -122,7 +129,6 @@ public class DashboardController {
         tblProducts.setItems(observableOrderItems);
 //        updateTotals(productDTO);
 
-        System.out.println(observableOrderItems);
         cmbProduct.getSelectionModel().clearSelection();
         txtQuantity.clear();
     }
@@ -358,11 +364,32 @@ public class DashboardController {
         timeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
         timeline.play(); // Start the timeline
     }
+    public void LogoutOnAction(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to log out?", ButtonType.YES , ButtonType.NO);
+        alert.setHeaderText(null);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES) {
+            Stage window = (Stage) mainPane.getScene().getWindow();
+            window.close();
 
+            Stage stage = new Stage();
+            try {
+                Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/LoginForm.fxml")));
+                Scene scene = new Scene(load);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR, e+"Faild load Login please contact Developer").show();
+            }
+        }
+    }
+    
     public String date(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }
 
+    
 }
