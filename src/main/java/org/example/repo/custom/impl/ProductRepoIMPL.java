@@ -173,6 +173,32 @@ public class ProductRepoIMPL implements ProductRepo {
         return products;
     }
 
+    public List<Product> getExpirySoon(String date, String today) throws Exception{
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement(
+                "SELECT * FROM products WHERE expiry_date <= ?&& expiry_date>?  ORDER BY expiry_date ASC");
+        ps.setString(1, date);
+        ps.setString(2, today);
+        ResultSet rs = ps.executeQuery();
+        List<Product> products = new ArrayList<>();
+
+        while (rs.next()) {
+            Product product = new Product();
+            product.setId(rs.getInt("id"));
+            product.setName(rs.getString("name"));
+            product.setCategory(rs.getString("category"));
+            product.setPrice(rs.getDouble("price"));
+            product.setCost(rs.getDouble("cost"));
+            product.setQuantity(rs.getInt("quantity"));
+            product.setSupplierid(rs.getInt("supplier_id"));
+            product.setExpirydate(rs.getString("expiry_date"));
+            product.setDate(rs.getString("added_at"));
+
+            products.add(product);
+        }
+        return products;
+    }
+
     public boolean addDiscount(String Discount ,Integer id) throws Exception{
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement ps = connection.prepareStatement("UPDATE products SET discount=? WHERE id=?");
@@ -183,7 +209,7 @@ public class ProductRepoIMPL implements ProductRepo {
 
     public List<Product> getAllname() throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement ps = connection.prepareStatement("SELECT id,name FROM products");
+        PreparedStatement ps = connection.prepareStatement("SELECT id,name FROM products WHERE quantity>0");
         ResultSet rs = ps.executeQuery();
         List<Product> products = new ArrayList<>();
         while(rs.next()){
@@ -194,4 +220,6 @@ public class ProductRepoIMPL implements ProductRepo {
         }
         return products;
     }
+
+
 }

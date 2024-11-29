@@ -18,6 +18,7 @@ import org.example.dto.OrderItemDTO;
 import org.example.dto.ProductDTO;
 import org.example.entity.OrderItem;
 import org.example.service.AIService;
+import org.example.service.custom.OfferService;
 import org.example.service.custom.OrderItemService;
 import org.example.service.custom.OrderService;
 import org.example.service.custom.impl.ProductServiceIMPL;
@@ -64,6 +65,7 @@ public class DashboardController {
     private final AIService aiService = new AIService();
     private final OrderService orderService = new OrderService();
     private ObservableList<OrderItemTM> observableOrderItems = FXCollections.observableArrayList();
+    private final OfferService offerService = new OfferService();
     private OrderItemTM orderItemTM = new OrderItemTM();
     private List<String> orderItems = FXCollections.observableArrayList();
 
@@ -79,40 +81,48 @@ public class DashboardController {
     }
 
     public void addOnClick(ActionEvent actionEvent) {
+        String quantityText = txtQuantity.getText();
+        int productId = getSelectedProductId();
+        ProductDTO productDTO = productService.search(productId);
+        quantity = Integer.parseInt(quantityText);
+
         if (getSelectedProductId() <= 0) {
             showAlert(Alert.AlertType.ERROR, "Product Select", "Please Select Product First!");
             return;
         }
 
-        String quantityText = txtQuantity.getText();
         if (Integer.parseInt(quantityText)==0|| !quantityText.matches("\\d+")) {
             showAlert(Alert.AlertType.ERROR, "Invalid Quantity", "Please enter a valid numeric quantity.");
             return;
         }
 
-        int productId = getSelectedProductId();
-        if (isProductAlreadyAdded(productId)) {
+        boolean rs = isProductAlreadyAdded(productId);
+        if (rs) {
             showAlert(Alert.AlertType.ERROR, "Duplicate Product", "This product is already added to the table.");
             return;
         }
 
-        ProductDTO productDTO = productService.search(productId);
-        quantity = Integer.parseInt(quantityText);
         if (productDTO.getQuantity() < quantity) {
             showAlert(Alert.AlertType.ERROR, "Insufficient Stock", "Requested quantity exceeds available stock.");
             return;
         }
         productDTO.setQuantity(quantity);
 
-        // Add product to the table
+        int mainProductId = checkForMainProductInCart();
+        if (mainProductId > 0 && checkOfferAvailable(mainProductId, productId)) {
+            productDTO.setDiscount("100");
+            productDTO.setQuantity(1); // Assume the free product quantity is always 1
+            showAlert(Alert.AlertType.INFORMATION, "Offer Applied", "Buy One Get One offer applied for this product!");
+        }
+
         OrderItemTM newOrderItem = convertDTOtoTM(productDTO);
         observableOrderItems.add(newOrderItem);
 
         orderItems.add(String.valueOf(orderItemTMtolist(newOrderItem)));
-
         tblProducts.setItems(observableOrderItems);
-        updateTotals(productDTO);
+//        updateTotals(productDTO);
 
+        System.out.println(observableOrderItems);
         cmbProduct.getSelectionModel().clearSelection();
         txtQuantity.clear();
     }
@@ -139,6 +149,10 @@ public class DashboardController {
                 }
 
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Done!");
+
+                observableOrderItems.clear();
+                tblProducts.setItems(observableOrderItems);
+                orderItems.clear();
                 totalPrice = 0;
                 DiscountPrice = 0;
                 subtotal = 0;
@@ -191,14 +205,6 @@ public class DashboardController {
             }
         });
 
-        // Listener to update selection and handle arrow clicks
-//        cmbProduct.setOnAction(event -> {
-//            String selectedName = String.valueOf(cmbProduct.getValue());
-//            if (selectedName != null && productMap.containsKey(selectedName)) {
-//                System.out.println(productMap.get(selectedName));
-//            }
-//        });
-
         // Return the selected product ID when requested
         String selectedName = String.valueOf(cmbProduct.getValue());
         if (selectedName != null && productMap.containsKey(selectedName)) {
@@ -235,7 +241,27 @@ public class DashboardController {
         });
     }
 
+    private int checkForMainProductInCart() {
+        List<Integer> mainProductIds = offerService.mainProductIds();
+        for (OrderItemTM item : observableOrderItems) {
+            if (mainProductIds.contains(item.getOrderItemId())) {
+                return item.getOrderItemId();
+            }
+        }
+        return -1;
+    }
+
+    private boolean checkOfferAvailable(Integer mainProductId, Integer productId) {
+        List<Integer> freeproductIds = offerService.freeProductIds(mainProductId);
+        for (int id : freeproductIds) {
+            if (id == productId) {
+                return true;
+            }
+        }return false;
+    }
+
     private OrderItemTM convertDTOtoTM(ProductDTO productDTO) {
+        OrderItemTM orderItemTM = new OrderItemTM();
         orderItemTM.setOrderItemId(productDTO.getId());
         orderItemTM.setItemName(productDTO.getName());
         orderItemTM.setQuantity(productDTO.getQuantity());
@@ -256,13 +282,28 @@ public class DashboardController {
         deleteIconView.setFitWidth(15);  // Set icon size
         deleteIconView.setFitHeight(15);
         deleteButton.setGraphic(deleteIconView);
-        deleteButton.setOnAction(event -> {
-//            observableOrderItems.remove(orderItemTM);
-//            updateTotals(productDTO);
-        });
+        deleteButton.setOnAction(event -> deleteItem(orderItemTM,productDTO));
         orderItemTM.setDeleteButton(deleteButton);
 
+        updateTotals(productDTO,orderItemTM);
+
         return orderItemTM;
+    }
+
+    private void deleteItem(OrderItemTM orderItemTM, ProductDTO productDTO) {
+        observableOrderItems.remove(orderItemTM);
+        orderItems.remove(String.valueOf(orderItemTMtolist(orderItemTM)));
+        tblProducts.setItems(observableOrderItems);
+        totalPrice -= productDTO.getPrice() * productDTO.getQuantity();
+        subtotal -= orderItemTM.getTotalPrice();
+        DiscountPrice = totalPrice - subtotal;
+        productcount = observableOrderItems.size();
+
+        txtProducts.setText(String.valueOf(productcount));
+        txtTotalPrice.setText(String.valueOf(totalPrice));
+        txtDiscount.setText(String.valueOf(DiscountPrice));
+        txtSubtotal.setText(String.valueOf(subtotal));
+
     }
 
     private List<String> orderItemTMtolist(OrderItemTM orderItemTM) {
@@ -273,8 +314,8 @@ public class DashboardController {
         return list;
     }
 
-    private void updateTotals(ProductDTO productDTO) {
-        productcount = observableOrderItems.size();
+    private void updateTotals(ProductDTO productDTO,OrderItemTM orderItemTM) {
+        productcount = observableOrderItems.size()+1;
         totalPrice += productDTO.getPrice() * productDTO.getQuantity();
         subtotal += orderItemTM.getTotalPrice();
         DiscountPrice = totalPrice - subtotal;

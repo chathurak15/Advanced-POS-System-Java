@@ -125,6 +125,23 @@ public class ProductServiceIMPL implements ProductService {
         }
     }
 
+    public List<ProductDTO> getExpirySoon(String date, String today) {
+        try {
+            List<Product> all = productRepo.getExpirySoon(date,today);
+            List<ProductDTO> productDTOS = new ArrayList<>();
+
+            if (all != null) {
+                for (Product product : all) {
+                    productDTOS.add(convertEntityToDTO(product));
+                }return productDTOS;
+            }else {
+                throw new RuntimeException("product not found");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean AddDiscount(String discount, Integer id) {
         try {
             return productRepo.addDiscount(discount,id);
@@ -143,7 +160,7 @@ public class ProductServiceIMPL implements ProductService {
                 }
                 return dtos;
             }else {
-                throw new RuntimeException("No users found");
+                throw new RuntimeException("No product found");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

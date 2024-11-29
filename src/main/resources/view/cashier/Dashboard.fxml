@@ -32,12 +32,12 @@
                               <Image url="@../../image/order.png" />
                            </image>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="logo" text="SEELE AI" textAlignment="CENTER" wrappingWidth="240.13671875">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="logo" text="Inventa AI" textAlignment="CENTER" wrappingWidth="240.13671875">
                            <font>
                               <Font name="Poppins ExtraBold" size="45.0" />
                            </font>
                            <fill>
-                              <LinearGradient endX="1.0" endY="1.0">
+                              <LinearGradient endX="1.0" endY="1.0" startX="0.6492890995260663" startY="0.46445497630331745">
                                  <stops>
                                     <Stop>
                                        <color>
@@ -46,21 +46,16 @@
                                     </Stop>
                                     <Stop offset="1.0">
                                        <color>
-                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                          <Color red="0.7894737124443054" green="0.7894737124443054" blue="0.7894737124443054" />
                                        </color>
                                     </Stop>
                                  </stops>
                               </LinearGradient>
                            </fill>
                         </Text>
-                        <Text fx:id="txtDate" strokeType="OUTSIDE" strokeWidth="0.0" text="2024/11/25 10:39" textAlignment="RIGHT" wrappingWidth="915.13671875">
+                        <Text fx:id="txtDate" strokeType="OUTSIDE" strokeWidth="0.0" text="2024/11/25 10:39" textAlignment="RIGHT" wrappingWidth="1156.13671875">
                            <font>
                               <Font name="Poppins SemiBold" size="21.0" />
-                           </font>
-                        </Text>
-                        <Text fx:id="txtName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="name" text="Thamodya" textAlignment="CENTER" wrappingWidth="174.13671875">
-                           <font>
-                              <Font name="Poppins SemiBold" size="20.0" />
                            </font>
                         </Text>
                      </children>

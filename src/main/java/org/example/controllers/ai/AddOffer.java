@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import org.example.service.custom.OfferService;
 import org.example.service.custom.impl.ProductServiceIMPL;
 import org.example.tm.RelationProductTM;
 
@@ -24,10 +25,9 @@ public class AddOffer {
     public AnchorPane addDiscountPane;
     public TextField txtDiscount;
     public ComboBox cmbFree;
-    private Integer productid;
 
-    private final ProductServiceIMPL productService = new ProductServiceIMPL();
     private Map<String, Integer> productMap = new HashMap<>();
+    private final OfferService offerService = new OfferService();
 
 
     public void closeOnClick(ActionEvent actionEvent) {
@@ -50,34 +50,52 @@ public class AddOffer {
     }
 
     public void AddOnClick(ActionEvent actionEvent) {
-        String selectedProduct = cmbFree.getValue().toString(); // Get selected product name
-        if (selectedProduct != null) {
-            Integer productId = productMap.get(selectedProduct); // Retrieve product ID
+        if (cmbFree.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a product first.");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+            return;
         }
-//        if (txtDiscount.getText().isEmpty()) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText(null);alert.setContentText("Please fill Discount field!");alert.showAndWait();
-//        }else{
-//            boolean rs = productService.AddDiscount(txtDiscount.getText(),productid);
-//            if (rs) {
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                alert.setHeaderText(null);
-//                alert.setContentText("Discount Added!");
-//                alert.showAndWait();
-//
-//                try {
-//                    addDiscountPane.getChildren().clear();
-//                    Parent product = FXMLLoader.load(getClass().getResource("/view/admin/foodRelationships/FoodRelationships.fxml"));
-//                    addDiscountPane.getChildren().add(product);
-//                }catch (Exception e) {
-//                    new Alert(Alert.AlertType.ERROR);
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("Discount Add Error!");
-//                }
-//            }
-//
-//        }
+        String selectedProduct = String.valueOf(cmbFree.getValue()); // Directly retrieve the selected value
+        Integer freeProductId = productMap.get(selectedProduct);
+
+        if (freeProductId == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Selected product is invalid.");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+            return;
+        }
+
+        Integer mainProductId=0;
+
+        List<String>products=  cmbFree.getItems();
+        for (String item : products) {
+            Integer productId = productMap.get(item);
+            System.out.println("Processing product ID: " + productId);
+            if (productId != null && !productId.equals(freeProductId)) {
+                mainProductId = productId;
+                System.out.println("Main product ID determined: " + mainProductId);
+                break;
+            }
+        }
+
+        if (mainProductId == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Unable to determine main product.");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+            return;
+        }
+
+        boolean rs = offerService.saveOffer(mainProductId, freeProductId);
+        if (rs) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Product added successfully.");
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Unable to save Offer Try  Again.");
+        }
+
     }
+
+
 
     public void cmbFree(List<RelationProductTM> relationProductTMList) {
         ObservableList<String> productNames = FXCollections.observableArrayList();

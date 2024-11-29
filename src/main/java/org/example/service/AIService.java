@@ -65,7 +65,7 @@ public class AIService {
                     while ((line = br.readLine()) != null) {
                         response.append(line);
                     }
-//                    System.out.println(response);
+                    System.out.println(response);
                     AssosiationRules assosiationRules = objectMapper.readValue(response.toString(), AssosiationRules.class);
 //                    System.out.println(assosiationRules.getAssociation_rules().toString());
                     return createNativeRelations(assosiationRules);
@@ -123,20 +123,7 @@ public class AIService {
         return normalRelations;
     }
 
-//    public String saveActiveRelation(RelativeRequestDTO relativeRequestDTO) {
-//        Item item1 = itemRepository.findById(relativeRequestDTO.getItem1()).orElseThrow(() -> new RuntimeException("Item not found"));
-//        Item item2 = itemRepository.findById(relativeRequestDTO.getItem2()).orElseThrow(() -> new RuntimeException("Item not found"));
-//
-//        Relations relation = new Relations();
-//        relation.setDependents(item1);
-//        relation.setItem2(item2);
-//        relation.setActive(true);
-//
-//        relationRepository.save(relation);
-//
-//        return "Relation saved successfully";
-//    }
-//
+
 //    public String checkOffers(Integer id) {
 //        Item item = null;
 //        try {
@@ -151,7 +138,7 @@ public class AIService {
 //            return "No offer available";
 //        }
 //    }
-//
+
 //    public List<Relations> getActiveDataset() {
 //        return relationRepository.findAll();
 //    }

@@ -7,8 +7,6 @@ import org.example.entity.Order;
 import org.example.entity.OrderItem;
 import org.example.repo.custom.OrderRepo;
 import org.modelmapper.ModelMapper;
-
-import javax.swing.text.html.parser.Entity;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -40,6 +38,34 @@ public class OrderService {
         } catch (Exception e) {
             System.out.println(e.getMessage());;
             return false;
+        }
+    }
+
+    public String getSales(String string){
+        try {
+            return orderRepo.getSales(string);
+        }catch (SQLException e){
+            return "0";
+        }catch (Exception e) {
+            return "0";
+        }
+    }
+    public String getlast30Sales(String string){
+        try {
+            return orderRepo.getlast30DaysSales(string);
+        }catch (SQLException e){
+            return "0";
+        }catch (Exception e) {
+            return "0";
+        }
+    }
+    public String getlast60Sales(String string){
+        try {
+            return orderRepo.getlast60DaysSales(string);
+        }catch (SQLException e){
+            return "0";
+        }catch (Exception e) {
+            return "0";
         }
     }
 

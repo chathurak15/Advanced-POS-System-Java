@@ -1,7 +1,8 @@
 package org.example.controllers.ai;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -10,13 +11,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import org.example.controllers.shortexpiry.AddProductDiscount;
-import org.example.entity.AI.Relations;
+import org.example.dto.AI.RelationshipOfferDTO;
 import org.example.entity.AI.RelationsNormal;
 import org.example.entity.Product;
 import org.example.service.AIService;
-import org.example.tm.ProductTM;
+import org.example.service.custom.OfferService;
 import org.example.tm.RelationProductTM;
+import org.example.tm.RelationalOfferTM;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,12 +32,22 @@ public class FoodRelationshipController {
     public TableColumn<RelationProductTM, Button> colAction;
 
     private final AIService aiService = new AIService();
-    private final Relations relations = new Relations();
+    private final OfferService offerService = new OfferService();
+    private ObservableList<RelationalOfferTM> masterData;
+
+    public TableView<RelationalOfferTM> tbloffers;
+    public TableColumn<RelationalOfferTM,Integer> colId;
+    public TableColumn<RelationalOfferTM,String> colMainProduct;
+    public TableColumn<RelationalOfferTM,String> colFreeProduct;
+    public TableColumn<RelationalOfferTM,String> colStatus;
+    public TableColumn<RelationalOfferTM,Button> colAction1;
 
 
     public void initialize() {
         visulizeTable();
+        visulizeOfferTable();
         loadTable();
+        loadOfferTable();
     }
 
     public void visulizeTable() {
@@ -45,9 +56,37 @@ public class FoodRelationshipController {
         colAction.setCellValueFactory(new PropertyValueFactory<>("addOffer"));
     }
 
+    public void visulizeOfferTable() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("offerId"));
+        colMainProduct.setCellValueFactory(new PropertyValueFactory<>("firstProduct"));
+        colFreeProduct.setCellValueFactory(new PropertyValueFactory<>("freeProduct"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colAction1.setCellValueFactory(new PropertyValueFactory<>("delete"));
+
+    }
+
+    //relationship offer table
+    public void loadOfferTable() {
+        try {
+            List<RelationalOfferTM> list = new ArrayList<>();
+            offerService.getAll();
+            for (RelationshipOfferDTO relationshipOfferDTO : offerService.getAll()) {
+                RelationalOfferTM relationalOfferTM = convertDTOToTM(relationshipOfferDTO);
+                list.add(relationalOfferTM);
+            }
+//
+            masterData = FXCollections.observableArrayList(list);
+            tbloffers.setItems(masterData);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /// relationship table
     public void loadTable() {
         try {
-
             List<RelationsNormal> relationsNormalList = (List<RelationsNormal>) aiService.createDataset();
 
             List<RelationProductTM> tableData = new ArrayList<>();
@@ -100,11 +139,14 @@ public class FoodRelationshipController {
     }
 
     private String formatProductDetails(Product product) {
-        return product.getId() + " - " + product.getName() + " - " + product.getExpirydate();
+        return product.getId() + " - " + product.getName()+" - "+ product.getPrice() + " - " + product.getExpirydate();
     }
 
     public void SearchOnClick(KeyEvent keyEvent) {
         setupSearch();
+    }
+
+    private void deleteOffer(RelationalOfferTM relationalOfferTM) {
     }
 
     private void setupSearch() {
@@ -124,5 +166,27 @@ public class FoodRelationshipController {
 
         tblRelationProduct.setItems(filteredData);
     }
+
+    private RelationalOfferTM convertDTOToTM(RelationshipOfferDTO relationshipOfferDTO) {
+        RelationalOfferTM relationalOfferTM = new RelationalOfferTM();
+
+        relationalOfferTM.setOfferId(relationshipOfferDTO.getId());
+        relationalOfferTM.setFirstProduct(relationshipOfferDTO.getMainProduct());
+        relationalOfferTM.setFreeProduct(relationshipOfferDTO.getFreeProduct());
+        relationalOfferTM.setStatus(relationshipOfferDTO.getStatus());
+
+        Button deleteButton = new Button();
+        Image deleteIcon = new Image("image/delete.png"); // Provide the correct path to your delete icon
+        ImageView deleteIconView = new ImageView(deleteIcon);
+        deleteIconView.setFitWidth(20);  // Set icon size
+        deleteIconView.setFitHeight(20);
+        deleteButton.setGraphic(deleteIconView);
+        deleteButton.setOnAction(event -> deleteOffer(relationalOfferTM));
+        relationalOfferTM.setDelete(deleteButton);
+
+        return relationalOfferTM;
+
+    }
+
 
 }

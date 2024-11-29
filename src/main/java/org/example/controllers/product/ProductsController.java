@@ -166,8 +166,9 @@ public class ProductsController {
                 }
 
                 String lowerCaseFilter = newValue.toLowerCase();
-                return product.getName().toLowerCase().contains(lowerCaseFilter)||
-                        product.getCategory().toLowerCase().contains(lowerCaseFilter);
+                return product.getName().toLowerCase().contains(lowerCaseFilter) ||
+                        product.getCategory().toLowerCase().contains(lowerCaseFilter) ||
+                        String.valueOf(product.getId()).toLowerCase().contains(lowerCaseFilter);
             });
         });
 

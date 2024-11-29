@@ -6,10 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -20,109 +17,7 @@
 
 <AnchorPane focusTraversable="true" styleClass="Dashboard" stylesheets="@../../css/StockManager/index.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.SMIndexController">
     <children>
-      <AnchorPane fx:id="mainPane" layoutX="276.0" layoutY="56.0" prefHeight="692.0" prefWidth="803.0" styleClass="Dashboard" stylesheets="@../../css/StockManager/index.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
-         <children>
-            <GridPane alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SEELE AI" textAlignment="CENTER" wrappingWidth="201.24000549316406">
-                     <font>
-                        <Font name="Poppins Black" size="40.0" />
-                     </font>
-                     <fill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" blue="0.7547619342803955" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="1.0" green="1.0" blue="1.0" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SEELE AI" textAlignment="CENTER" wrappingWidth="202.24000549316406" GridPane.columnIndex="2">
-                     <font>
-                        <Font name="Poppins Black" size="40.0" />
-                     </font>
-                     <fill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" blue="0.7547619342803955" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="1.0" green="1.0" blue="1.0" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                  </Text>
-                  <Text layoutX="412.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEELE AI" textAlignment="CENTER" wrappingWidth="180.24000549316406" GridPane.columnIndex="3">
-                     <font>
-                        <Font name="Poppins Black" size="40.0" />
-                     </font>
-                     <fill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" blue="0.7547619342803955" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="1.0" green="1.0" blue="1.0" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SEELE AI" textAlignment="CENTER" wrappingWidth="202.24000549316406" GridPane.columnIndex="1">
-                     <font>
-                        <Font name="Poppins Black" size="40.0" />
-                     </font>
-                     <fill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" blue="0.7547619342803955" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="1.0" green="1.0" blue="1.0" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                  </Text>
-               </children>
-            </GridPane>
-         </children></AnchorPane>
+      <AnchorPane fx:id="mainPane" layoutX="276.0" layoutY="56.0" prefHeight="692.0" prefWidth="803.0" styleClass="Dashboard" stylesheets="@../../css/StockManager/index.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
         <HBox alignment="CENTER_RIGHT" layoutX="193.0" prefHeight="56.0" prefWidth="886.0" styleClass="topMenu" stylesheets="@../../css/StockManager/index.css" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="0.0">
             <children>
                 <Label fx:id="lbDateandTime" prefHeight="40.0" prefWidth="216.0" styleClass="date" text="2024/11/25   04.18" textAlignment="CENTER">
@@ -132,19 +27,15 @@
                <padding>
                   <Insets left="15.0" right="15.0" />
                </padding>
-                </Label>
-                <Label fx:id="lbName" layoutX="783.0" layoutY="29.0" prefHeight="42.0" prefWidth="152.0" text="Kavindu">
-                    <font>
-                        <Font name="Poppins SemiBold" size="19.0" />
-                    </font>
                <HBox.margin>
-                  <Insets left="20.0" right="5.0" />
+                  <Insets right="25.0" />
                </HBox.margin>
                 </Label>
-            </children></HBox>
+            </children>
+      </HBox>
         <VBox prefHeight="747.0" prefWidth="276.0" styleClass="LeftMenu" stylesheets="@../../css/StockManager/index.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SEELE AI" textAlignment="CENTER" wrappingWidth="227.24000549316406">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inventa AI" textAlignment="CENTER" wrappingWidth="268.24000549316406">
                     <font>
                         <Font name="Poppins Black" size="40.0" />
                     </font>
@@ -165,38 +56,15 @@
                         </LinearGradient>
                     </fill>
                     <VBox.margin>
-                        <Insets left="5.0" top="10.0" />
+                        <Insets left="5.0" top="15.0" />
                     </VBox.margin>
                 </Text>
-                <HBox fx:id="lbDashboard" alignment="CENTER_LEFT" onMouseClicked="#DashboardOnClick" prefHeight="50.0" prefWidth="257.0" styleClass="sidebar-item" stylesheets="@../../css/StockManager/index.css">
-                    <children>
-                        <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../image/layout.png" />
-                            </image>
-                        </ImageView>
-                        <Text fx:id="txtDashboard" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" wrappingWidth="186.58333587646484">
-                            <font>
-                                <Font name="Poppins SemiBold" size="20.0" />
-                            </font>
-                            <HBox.margin>
-                                <Insets left="15.0" />
-                            </HBox.margin>
-                        </Text>
-                    </children>
-                    <padding>
-                        <Insets left="30.0" />
-                    </padding>
-                    <VBox.margin>
-                        <Insets top="25.0" />
-                    </VBox.margin>
-                </HBox>
                 <HBox fx:id="lbProducts" alignment="CENTER_LEFT" layoutX="10.0" layoutY="96.0" onMouseClicked="#ProductsOnClick" prefHeight="50.0" prefWidth="283.0" styleClass="sidebar-item" stylesheets="@../../css/StockManager/index.css">
                     <padding>
                         <Insets left="30.0" />
                     </padding>
                     <VBox.margin>
-                        <Insets top="15.0" />
+                        <Insets top="20.0" />
                     </VBox.margin>
                     <children>
                         <ImageView fitHeight="33.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">

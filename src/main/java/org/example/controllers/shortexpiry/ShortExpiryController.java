@@ -87,28 +87,48 @@ public class ShortExpiryController {
                 visualizeTable();
                 break;
             case "Within Week":
-                loadTableData(withinOneWeekDate());
+                loadExpirySoonTableData(withinOneWeekDate(),date());
                 visualizeTable();
                 break;
             case "Within 2 Weeks":
-                 loadTableData(withinTwoWeekDate());
+                loadExpirySoonTableData(withinTwoWeekDate(),date());
                  visualizeTable();
                  break;
             case "Within Month":
-                 loadTableData(withinOneMonthDate());
+                loadExpirySoonTableData(withinOneMonthDate(),date());
                  visualizeTable();
                  break;
             default:
-                  loadTableData(date());
+                loadTableData(date());
                   visualizeTable();
                   break;
         }
     }
 
+
+
     public void loadTableData(String date){
         try {
             List<ProductTM> list = new ArrayList<>();
             List<ProductDTO> expired = productService.getExpired(date);
+            for (ProductDTO productDTO : expired) {
+                ProductTM product = convertDTOtoProductTM(productDTO);
+                list.add(product);
+            }
+
+            masterData = FXCollections.observableArrayList(list);
+            tblExpProduct.setItems(masterData);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void loadExpirySoonTableData(String date,String today){
+        try {
+            List<ProductTM> list = new ArrayList<>();
+            List<ProductDTO> expired = productService.getExpirySoon(date,today);
             for (ProductDTO productDTO : expired) {
                 ProductTM product = convertDTOtoProductTM(productDTO);
                 list.add(product);

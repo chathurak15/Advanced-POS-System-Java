@@ -1,0 +1,15 @@
+
+.product-table{
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-border-color: #000a4c;
+
+}
+.product-table-header{
+    -fx-pref-height: 42;
+    -fx-text-fill: #000000;
+    -fx-alignment: center;
+    -fx-font-size: 14px;
+    -fx-font-family: "Poppins SemiBold";
+}
+

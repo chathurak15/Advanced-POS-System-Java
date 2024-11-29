@@ -26,8 +26,6 @@ import java.util.Optional;
 public class SMIndexController {
     public AnchorPane mainPane;
     public Label lbName;
-    public HBox lbDashboard;
-    public Text txtDashboard;
     public HBox lbProducts;
     public Text txtProducts;
     public HBox lbShortExpiry;
@@ -41,14 +39,10 @@ public class SMIndexController {
     private List<Text> sidebarTexts;
 
     public void initialize() {
-        sidebarItems = List.of( lbDashboard, lbProducts, lbShortExpiry, lbLowStock,  lbSuppliers );
-        sidebarTexts = List.of( txtDashboard, txtProducts,txtShortExpiry,txtLowStocks, txtSuppliers);
+        sidebarItems = List.of(lbProducts, lbShortExpiry, lbLowStock,  lbSuppliers );
+        sidebarTexts = List.of( txtProducts,txtShortExpiry,txtLowStocks, txtSuppliers);
         updateDateTime();
-    }
-
-    public void DashboardOnClick(MouseEvent mouseEvent) {
-        setActiveTab(lbDashboard);
-        setActiveText(txtDashboard);
+        loadUI("admin/product/products");
     }
 
     public void ProductsOnClick(MouseEvent mouseEvent) {

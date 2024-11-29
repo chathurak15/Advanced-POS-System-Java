@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class MindexController {
-    public Label lbName;
     public HBox lbDashboard;
     public HBox lbProducts;
     public Text txtDashboard;
@@ -50,6 +49,7 @@ public class MindexController {
         updateDateTime();
         sidebarItems = List.of( lbDashboard, lbProducts, lbShortExpiry, lbFoodRelationships, lbSuppliers, lbUsers );
         sidebarTexts = List.of( txtDashboard, txtProducts,txtShortExpiry,txtFoodRelationships, txtSuppliers, txtUsers );
+        loadUI("admin/Dashboard");
     }
 
 
@@ -58,21 +58,6 @@ public class MindexController {
         setActiveText(txtDashboard);
 
         loadUI("admin/Dashboard");
-
-//        Stage window = (Stage) mainPane.getScene().getWindow();
-//        window.close();
-//
-//        Stage stage = new Stage();
-//        try {
-//            Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Index.fxml")));
-//            Scene scene = new Scene(load);
-//            stage.setScene(scene);
-//            stage.show();
-//
-//        } catch (IOException e) {
-//            new Alert(Alert.AlertType.ERROR, e+"Faild load Login please contact Developer").show();
-//        }
-
     }
 
     public void ProductsOnClick(MouseEvent mouseEvent) {

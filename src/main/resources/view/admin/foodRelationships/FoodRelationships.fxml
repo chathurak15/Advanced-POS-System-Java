@@ -7,8 +7,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="submainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1288.0" stylesheets="@../../../css/admin/foodReletion.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.ai.FoodRelationshipController">
@@ -44,12 +42,25 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="1093.0" AnchorPane.bottomAnchor="598.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="548.0" />
-                                 </children>
-                              </HBox>
+                              <TableView fx:id="tbloffers" layoutX="12.0" layoutY="40.0" prefHeight="563.0" prefWidth="1161.0" styleClass="product-table" stylesheets="@../../../css/admin/foodReletion.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="30.0">
+                                 <columns>
+                                    <TableColumn fx:id="colId" prefWidth="59.0" styleClass="product-table-header" text="ID" />
+                                    <TableColumn fx:id="colMainProduct" prefWidth="440.0" styleClass="product-table-header" text="Main Product (Buy Product)" />
+                                    <TableColumn fx:id="colFreeProduct" prefWidth="391.0" styleClass="product-table-header" text="Free Product" />
+                                    <TableColumn fx:id="colStatus" prefWidth="169.0" styleClass="product-table-header" text="Status" />
+                                    <TableColumn fx:id="colAction1" prefWidth="119.0" styleClass="product-table-header" text="Action" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </TableView>
                            </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
                         </AnchorPane>
                   </content>
                 </Tab>

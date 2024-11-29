@@ -59,4 +59,35 @@ public class OrderRepo {
 
         return ps.executeUpdate()>0;
     }
+
+    public String getSales(String string)throws Exception{
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT SUM(totalAmount)-SUM(totalDiscount) FROM orders WHERE billDate = ?");
+        ps.setString(1, string);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            return rs.getString(1);
+        }
+        return null;
+    }
+    public String getlast30DaysSales(String string)throws Exception{
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT SUM(totalAmount)-SUM(totalDiscount) FROM orders WHERE billDate > ?");
+        ps.setString(1, string);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            return rs.getString(1);
+        }
+        return null;
+    }
+    public String getlast60DaysSales(String string)throws Exception{
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT SUM(totalAmount)-SUM(totalDiscount) FROM orders WHERE billDate > ?");
+        ps.setString(1, string);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            return rs.getString(1);
+        }
+        return null;
+    }
 }

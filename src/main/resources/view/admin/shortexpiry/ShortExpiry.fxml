@@ -16,8 +16,8 @@
          <children>
             <TableView fx:id="tblExpProduct" layoutX="53.0" layoutY="76.0" prefHeight="558.0" prefWidth="1149.0" styleClass="product-table" stylesheets="@../../../css/admin/shortexpiry.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="76.0">
               <columns>
-                <TableColumn fx:id="colId" prefWidth="32.0" sortType="DESCENDING" styleClass="product-table-header" text="#" />
-                <TableColumn fx:id="colName" prefWidth="395.0" styleClass="product-table-header" text="Name" />
+                <TableColumn fx:id="colId" prefWidth="53.0" sortType="DESCENDING" styleClass="product-table-header" text="ID" />
+                <TableColumn fx:id="colName" prefWidth="375.0" styleClass="product-table-header" text="Name" />
                   <TableColumn fx:id="colCategory" prefWidth="191.0" styleClass="product-table-header" text="Category" />
                   <TableColumn fx:id="colQty" prefWidth="70.0" styleClass="product-table-header" text="QTY" />
                   <TableColumn fx:id="colPrice" prefWidth="132.0" styleClass="product-table-header" text="Price" />
